@@ -1,56 +1,54 @@
-- title: Quick Start
+- title: 快速入门
   items:
   - id: getting-started
-    title: Getting Started
+    title: 入门教程
   - id: tutorial
-    title: Tutorial
+    title: 教程
   - id: thinking-in-react
-    title: Thinking in React
-- title: Community Resources
+    title: 深入思考React
+- title: 社区资源
   items:
   - id: videos
-    title: Videos
+    title: 视频
   - id: complementary-tools
-    title: Complementary Tools
+    title: 补充工具
   - id: examples
-    title: Examples
+    title: 范例
 - title: Guides
   items:
   - id: why-react
-    title: Why React?
+    title: 为什么使用 React?
   - id: displaying-data
-    title: Displaying Data
+    title: 数据展现
     subitems:
     - id: jsx-in-depth
-      title: JSX in Depth
+      title: 深入理解JSX
     - id: jsx-spread
-      title: JSX Spread Attributes
+      title: JSX的扩展属性
     - id: jsx-gotchas
-      title: JSX Gotchas
+      title: JSX的陷阱
   - id: interactivity-and-dynamic-uis
-    title: Interactivity and Dynamic UIs
+    title: 富交互性的动态用户界面
   - id: multiple-components
-    title: Multiple Components
+    title: 可组合的多个组件
   - id: reusable-components
-    title: Reusable Components
-  - id: transferring-props
-    title: Transferring Props
+    title: 可复用组件
   - id: forms
-    title: Forms
+    title: 表单
   - id: working-with-the-browser
-    title: Working With the Browser
+    title: 浏览器中的工作原理
     subitems:
     - id: more-about-refs
-      title: More About Refs
+      title: 关于Refs的更多内容
   - id: tooling-integration
     title: Tooling Integration
   - id: addons
-    title: Add-Ons
+    title: 插件
     subitems:
     - id: animation
-      title: Animation
+      title: 动画
     - id: two-way-binding-helpers
-      title: Two-Way Binding Helpers
+      title: 双向绑定
     - id: class-name-manipulation
       title: Class Name Manipulation
     - id: test-utils
@@ -72,7 +70,7 @@
   - id: component-specs
     title: Component Specs and Lifecycle
   - id: tags-and-attributes
-    title: Supported Tags and Attributes
+    title: 标签和属性支持
   - id: events
     title: Event System
   - id: dom-differences
@@ -81,13 +79,9 @@
     title: Special Non-DOM Attributes
   - id: reconciliation
     title: Reconciliation
-  - id: glossary
-    title: React (Virtual) DOM Terminology
 - title: Flux
   items:
   - id: flux-overview
-    title: Flux Overview
-    href: http://facebook.github.io/flux/docs/overview.html
+    title: Flux概述
   - id: flux-todo-list
-    title: Flux TodoMVC Tutorial
-    href: http://facebook.github.io/flux/docs/todo-list.html
+    title: Flux的TodoMVC教程
