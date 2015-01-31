@@ -7,25 +7,24 @@ id: home
 <section class="light home-section">
   <div class="marketing-row">
     <div class="marketing-col">
-      <h3>Just the UI</h3>
+      <h3>仅仅是UI</h3>
       <p>
-        Lots of people use React as the V in MVC.
-        Since React makes no assumptions about the rest of your technology stack,
-        it&apos;s easy to try it out on a small feature in an existing project.
+        许多人使用React作为MVC架构的V层。
+        尽管React并没有假设过你的其余技术栈，
+        但它仍可以作为一个小特征轻易地在已有项目中使用
       </p>
     </div>
     <div class="marketing-col">
-      <h3>Virtual DOM</h3>
+      <h3>虚拟DOM</h3>
       <p>
-        React uses a <i>virtual DOM</i> diff implementation for ultra-high performance. It can also
-        render on the server using Node.js &mdash; no heavy browser DOM required.
+        React为了更高超的性能而使用虚拟DOM作为其不同的实现。
+        它同时也可以由服务端Node.js渲染 － 而不需要过重的浏览器DOM支持
       </p>
     </div>
     <div class="marketing-col">
-      <h3>Data flow</h3>
+      <h3>数据流</h3>
       <p>
-        React implements one-way reactive data flow which reduces boilerplate and is
-        easier to reason about than traditional data binding.
+        React实现了单向响应的数据流，从而减少了重复代码，这也是它为什么比传统数据绑定更简单。
       </p>
     </div>
   </div>
@@ -34,47 +33,39 @@ id: home
 <section class="home-section">
   <div id="examples">
     <div class="example">
-      <h3>A Simple Component</h3>
+      <h3>一个简单的组件</h3>
       <p>
-        React components implement a `render()` method that takes input data and
-        returns what to display. This example uses an XML-like syntax called
-        JSX. Input data that is passed into the component can be accessed by
-        `render()` via `this.props`.
+        React组件通过一个 <code>render()</code> 方法，接受输入的参数并返回展示的对象。 <br/>
+        以下这个例子使用了JSX，它类似于XML的语法<br/>
+        输入的参数通过 <code>render()</code> 传入组件后，将存储在<code>this.props</code>
       </p>
       <p>
-        <strong>JSX is optional and not required to use React.</strong> Try
-        clicking on "Compiled JS" to see the raw JavaScript code produced by
-        the JSX compiler.
+        <strong>JSX是可选的，并不强制要求使用。</strong><br/>
+        点击 &quot;Compiled JS&quot; 可以看到JSX编译之后的JavaScript代码
       </p>
       <div id="helloExample"></div>
     </div>
     <div class="example">
-      <h3>A Stateful Component</h3>
+      <h3>一个有状态的组件</h3>
       <p>
-        In addition to taking input data (accessed via `this.props`), a
-        component can maintain internal state data (accessed via `this.state`).
-        When a component's state data changes, the rendered markup will be
-        updated by re-invoking `render()`.
+        除了接受输入数据（通过 <code>this.props</code> ），组件还可以保持内部状态数据（通过 <code>this.state</code> ）。当一个组件的状态数据的变化，展现的标记将被重新调用 <code>render()</code> 更新。
       </p>
       <div id="timerExample"></div>
     </div>
     <div class="example">
-      <h3>An Application</h3>
-      <p>
-        Using `props` and `state`, we can put together a small Todo application.
-        This example uses `state` to track the current list of items as well as
-        the text that the user has entered. Although event handlers appear to be
-        rendered inline, they will be collected and implemented using event
-        delegation.
-      </p>
-      <div id="todoExample"></div>
+       <h3>一个应用程序</h3>
+       <p>
+          通过使用 <code>props</code> 和 <code>state</code>, 我们可以组合构建一个小型的Todo程序。<br/>
+          下面例子使用 <code>state</code> 去监测当前列表的项以及用户已经输入的文本。
+          尽管事件绑定似乎是以内联的方式，但他们将被收集起来并以事件代理的方式实现。
+        </p>
+        <div id="todoExample"></div>
     </div>
     <div class="example">
-      <h3>A Component Using External Plugins</h3>
+      <h3>一个使用外部插件的组件</h3>
       <p>
-        React is flexible and provides hooks that allow you to interface with
-        other libraries and frameworks. This example uses Showdown, an external
-        Markdown library, to convert the textarea's value in real-time.
+        React是灵活的，并且提供钩子函数允许你跟其他库和框架对接。<br/>
+        下面例子展现了一个案例，使用外部库Markdown实时转化textarea的值。
       </p>
       <div id="markdownExample"></div>
     </div>
@@ -87,7 +78,7 @@ id: home
 <hr class="home-divider" />
 <section class="home-bottom-section">
   <div class="buttons-unit">
-    <a href="docs/getting-started.html" class="button">Get Started</a>
-    <a href="downloads.html" class="button">Download React v{{site.react_version}}</a>
+    <a href="docs/getting-started.html" class="button">快速开始</a>
+    <a href="downloads.html" class="button">下载 v{{site.react_version}}</a>
   </div>
 </section>

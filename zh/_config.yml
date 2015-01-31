@@ -1,6 +1,6 @@
 ---
 name: React
-description: A JavaScript library for building user interfaces
+description: 用于构建用户界面的Javascript库
 url: http://facebook.github.io
 baseurl: "/react"
 permalink: "/blog/:year/:month/:day/:title.html"
@@ -34,4 +34,4 @@ sass:
   sass_dir: _css
 gems:
 - jekyll-redirect-from
-react_version: 0.11.2
+react_version: 0.12.2
