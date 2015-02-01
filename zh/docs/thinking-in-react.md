@@ -1,23 +1,26 @@
 ---
 id: thinking-in-react
-title: Thinking in React
+title: 深入理解React
 prev: tutorial.html
 next: videos.html
 ---
 
-This was originally a [blog post](/react/blog/2013/11/05/thinking-in-react.html) from the [official React blog](/react/blog).
+这是一篇源自 [官方博客](/react/blog) 的 [文章](/react/blog/2013/11/05/thinking-in-react.html)
 
-React is, in my opinion, the premier way to build big, fast Web apps with JavaScript. It has scaled very well for us at Facebook and Instagram.
+据我所知，React是最早使用JavaScript构建大型、快速的Web应用程序的技术方案。它已经被我们广泛应用于 Facebook 和 Instagram。
 
-One of the many great parts of React is how it makes you think about apps as you build them. In this post I'll walk you through the thought process of building a searchable product data table using React. *Note if you can't see the embeded jsfiddles on this page make sure your browser is pointing to the `http` version of this page not `https`*
+React众多优秀特征中的其中一部分就是，教会你去思考如何构建应用程序。
 
-## Start with a mock
+本文中，我将跟你一起使用 React 构建一个具备搜索功能的产品列表。 
+**注意：假如你无法看到页面上嵌入的jsfiddles，请确认你使用的 `http` 请求而非 `https`**
 
-Imagine that we already have a JSON API and a mock from our designer. Our designer apparently isn't very good because the mock looks like this:
+## 从原型(mock)开始
+
+假设我们已经拥有了一个JSON接口和设计师设计的原型。我们的设计师显然不够好，因为原型看起来如下：
 
 ![Mockup](/react/img/blog/thinking-in-react-mock.png)
 
-Our JSON API returns some data that looks like this:
+JSON接口返回数据如下：
 
 ```
 [
@@ -30,9 +33,9 @@ Our JSON API returns some data that looks like this:
 ];
 ```
 
-## Step 1: break the UI into a component hierarchy
+## 第一步: 拆分用户界面为一个组件树
 
-The first thing you'll want to do is to draw boxes around every component (and subcomponent) in the mock and give them all names. If you're working with a designer they may have already done this, so go talk to them! Their Photoshop layer names may end up being the names of your React components!
+你要做的第一件事是，为所有组件（及子组件）命名并画上线框图。假如你和设计师一起工作，也许他们已经完成了这项工作，所以赶紧去跟他们沟通！他们的 Photoshop 图层名也许最终可以直接用于你的 React 组件名。
 
 But how do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](http://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing it should be decomposed into smaller subcomponents.
 

@@ -5,7 +5,7 @@
   - id: tutorial
     title: 教程
   - id: thinking-in-react
-    title: 深入思考React
+    title: 深入理解React
 - title: 指南
   items:
   - id: why-react
