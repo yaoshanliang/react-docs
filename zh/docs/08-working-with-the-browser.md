@@ -1,6 +1,6 @@
 ---
 id: working-with-the-browser
-title: Working With the Browser
+title: 浏览器中的工作原理
 permalink: working-with-the-browser.html
 prev: forms.html
 next: more-about-refs.html
@@ -9,7 +9,7 @@ next: more-about-refs.html
 React provides powerful abstractions that free you from touching the DOM directly in most cases, but sometimes you simply need to access the underlying API, perhaps to work with a third-party library or existing code.
 
 
-## The Virtual DOM
+## 虚拟DOM
 
 React is so fast because it never talks to the DOM directly. React maintains a fast in-memory representation of the DOM. `render()` methods return a *description* of the DOM, and React can diff this description with the in-memory representation to compute the fastest way to update the browser.
 
