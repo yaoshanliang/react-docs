@@ -42,9 +42,9 @@
     - id: two-way-binding-helpers
       title: 双向绑定
     - id: class-name-manipulation
-      title: Class Name Manipulation
+      title: 类名操作
     - id: test-utils
-      title: Test Utilities
+      title: 测试套件
     - id: clone-with-props
       title: Cloning Components
     - id: update
