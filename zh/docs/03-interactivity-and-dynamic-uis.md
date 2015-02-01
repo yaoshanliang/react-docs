@@ -1,15 +1,15 @@
 ---
 id: interactivity-and-dynamic-uis
-title: Interactivity and Dynamic UIs
+title: 富交互性的动态用户界面
 permalink: interactivity-and-dynamic-uis.html
 prev: jsx-gotchas.html
 next: multiple-components.html
 ---
 
-You've already [learned how to display data](/react/docs/displaying-data.html) with React. Now let's look at how to make our UIs interactive.
+我们已经学习如何使用 React [呈现数据](/react/docs/displaying-data.html)。现在让我们来学习如何创建交互式界面。
 
 
-## A Simple Example
+## 简单例子
 
 ```javascript
 var LikeButton = React.createClass({
@@ -36,51 +36,51 @@ React.render(
 ```
 
 
-## Event Handling and Synthetic Events
+## 事件处理与合成事件（Synthetic Events）
 
-With React you simply pass your event handler as a camelCased prop similar to how you'd do it in normal HTML. React ensures that all events behave identically in IE8 and above by implementing a synthetic event system. That is, React knows how to bubble and capture events according to the spec, and the events passed to your event handler are guaranteed to be consistent with [the W3C spec](http://www.w3.org/TR/DOM-Level-3-Events/), regardless of which browser you're using.
+React 里只需把事件处理器（event handler）以骆峰命名（camelCased）形式当作组件的 props 传入即可，就像使用普通 HTML 那样。React 内部创建一套合成事件系统来使所有事件在 IE8 和以上浏览器表现一致。也就是说，React 知道如何冒泡和捕获事件，而且你的事件处理器接收到的 events 参数与 [W3C 规范](http://www.w3.org/TR/DOM-Level-3-Events/) 一致，无论你使用哪种浏览器。
 
-If you'd like to use React on a touch device such as a phone or tablet, simply call `React.initializeTouchEvents(true);` to enable touch event handling.
+如果需要在手机或平板等触摸设备上使用 React，需要调用 `React.initializeTouchEvents(true);` 启用触摸事件处理。
 
+## 幕后原理：自动绑定和事件代理
 
-## Under the Hood: Autobinding and Event Delegation
+在幕后，React 做了一些操作来让代码高效运行且易于理解。
 
-Under the hood, React does a few things to keep your code performant and easy to understand.
+**Autobinding:** 在 JavaScript 里创建回调的时候，为了保证 `this` 的正确性，一般都需要显式地绑定方法到它的实例上。有了 React，所有方法被自动绑定到了它的组件实例上。React 还缓存这些绑定方法，所以 CPU 和内存都是非常高效。而且还能减少打字！
 
-**Autobinding:** When creating callbacks in JavaScript, you usually need to explicitly bind a method to its instance such that the value of `this` is correct. With React, every method is automatically bound to its component instance. React caches the bound method such that it's extremely CPU and memory efficient. It's also less typing!
-
-**Event delegation:** React doesn't actually attach event handlers to the nodes themselves. When React starts up, it starts listening for all events at the top level using a single event listener. When a component is mounted or unmounted, the event handlers are simply added or removed from an internal mapping. When an event occurs, React knows how to dispatch it using this mapping. When there are no event handlers left in the mapping, React's event handlers are simple no-ops. To learn more about why this is fast, see [David Walsh's excellent blog post](http://davidwalsh.name/event-delegate).
-
-
-## Components are Just State Machines
-
-React thinks of UIs as simple state machines. By thinking of a UI as being in various states and rendering those states, it's easy to keep your UI consistent.
-
-In React, you simply update a component's state, and then render a new UI based on this new state. React takes care of updating the DOM for you in the most efficient way.
+**事件代理 ：** React 实际并没有把事件处理器绑定到节点本身。当 React 启动的时候，它在最外层使用唯一一个事件监听器处理所有事件。当组件被加载和卸载时，只是在内部映射里添加或删除事件处理器。当事件触发，React 根据映射来决定如何分发。当映射里处理器时，会当作空操作处理。参考 [David Walsh 很棒的文章](http://davidwalsh.name/event-delegate) 了解这样做高效的原因。
 
 
-## How State Works
+## 组件其实是状态机（State Machines）
 
-A common way to inform React of a data change is by calling `setState(data, callback)`. This method merges `data` into `this.state` and re-renders the component. When the component finishes re-rendering, the optional `callback` is called. Most of the time you'll never need to provide a `callback` since React will take care of keeping your UI up-to-date for you.
+React 把用户界面当作简单状态机。把用户界面想像成拥有不同状态然后渲染这些状态，可以轻松让用户界面和数据保持一致。
 
-
-## What Components Should Have State?
-
-Most of your components should simply take some data from `props` and render it. However, sometimes you need to respond to user input, a server request or the passage of time. For this you use state.
-
-**Try to keep as many of your components as possible stateless.** By doing this you'll isolate the state to its most logical place and minimize redundancy, making it easier to reason about your application.
-
-A common pattern is to create several stateless components that just render data, and have a stateful component above them in the hierarchy that passes its state to its children via `props`. The stateful component encapsulates all of the interaction logic, while the stateless components take care of rendering data in a declarative way.
+React 里，只需更新组件的 state，然后根据新的 state 重新渲染用户界面（不要操作 DOM）。React 来决定如何最高效地更新 DOM。
 
 
-## What *Should* Go in State?
+## State 工作原理
 
-**State should contain data that a component's event handlers may change to trigger a UI update.** In real apps this data tends to be very small and JSON-serializable. When building a stateful component, think about the minimal possible representation of its state, and only store those properties in `this.state`. Inside of `render()` simply compute any other information you need based on this state. You'll find that thinking about and writing applications in this way tends to lead to the most correct application, since adding redundant or computed values to state means that you need to explicitly keep them in sync rather than rely on React computing them for you.
+常用的通知 React 数据变化的方法是调用 `setState(data, callback)`。这个方法会合并（merge） `data` 到 `this.state`，并重新渲染组件。渲染完成后，调用可选的 `callback` 回调。大部分情况下不需要提供 `callback`，因为 React 会负责把界面更新到最新状态。
 
-## What *Shouldn’t* Go in State?
 
-`this.state` should only contain the minimal amount of data needed to represent your UI's state. As such, it should not contain:
+## 哪些组件应该有 State？
 
-* **Computed data:** Don't worry about precomputing values based on state — it's easier to ensure that your UI is consistent if you do all computation within `render()`. For example, if you have an array of list items in state and you want to render the count as a string, simply render `this.state.listItems.length + ' list items'` in your `render()` method rather than storing it on state.
-* **React components:** Build them in `render()` based on underlying props and state.
-* **Duplicated data from props:** Try to use props as the source of truth where possible. One valid use to store props in state is to be able to know its previous values, because props can change over time.
+大部分组件的工作应该是从 `props` 里取数据并渲染出来。但是，有时需要对用户输入、服务器请求或者时间变化等作出响应，这时才需要使用 State。
+
+** 尝试把尽可能多的组件无状态化。** 这样做能隔离 state，把它放到最合理的地方，也能减少冗余并，同时易于解释程序运作过程。
+
+常用的模式是创建多个只负责渲染数据的无状态（stateless）组件，在它们的上层创建一个有状态（stateful）组件并把它的状态通过 `props` 传给子级。这个有状态的组件封装了所有用户的交互逻辑，而这些无状态组件则负责声明式地渲染数据。
+
+
+## 哪些 *应该* 作为 State？
+
+**State 应该包括那些可能被组件的事件处理器改变并触发用户界面更新的数据。** 真实的应用中这种数据一般都很小且能被 JSON 序列化。当创建一个状态化的组件时，想象一下表示它的状态最少需要哪些数据，并只把这些数据存入 `this.state`。在 `render()` 里再根据 state 来计算你需要的其它数据。你会发现以这种方式思考和开发程序最终往往是正确的，因为如果在 state 里添加冗余数据或计算所得数据，需要你经常手动保持数据同步，不能让 React 来帮你处理。
+
+
+## 哪些 *不应该* 作为 State？
+
+`this.state` 应该仅包括能表示用户界面状态所需的最少数据。因些，它不应该包括：
+
+* **计算所得数据：** 不要担心根据 state 来预先计算数据 —— 把所有的计算都放到 `render()` 里更容易保证用户界面和数据的一致性。例如，在 state 里有一个数组（listItems），我们要把数组长度渲染成字符串， 直接在 `render()` 里使用 `this.state.listItems.length + ' list items'` 比把它放到 state 里好的多。
+* **React 组件：** 在 `render()` 里使用当前 props 和 state 来创建它。
+* **基于 props 的重复数据：** 尽可能使用 props 来作为惟一数据来源。把 props 保存到 state 的一个有效的场景是需要知道它以前值的时候，因为未来的 props 可能会变化。

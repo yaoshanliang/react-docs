@@ -6,23 +6,23 @@
     title: 教程
   - id: thinking-in-react
     title: 深入思考React
-- title: Guides
+- title: 指南
   items:
   - id: why-react
     title: 为什么使用 React?
   - id: displaying-data
-    title: 数据展现
+    title: 数据呈现
     subitems:
     - id: jsx-in-depth
       title: 深入理解JSX
     - id: jsx-spread
-      title: JSX的扩展属性
+      title: JSX的延展属性
     - id: jsx-gotchas
       title: JSX的陷阱
   - id: interactivity-and-dynamic-uis
     title: 富交互性的动态用户界面
   - id: multiple-components
-    title: 可组合的多个组件
+    title: 复合组件
   - id: reusable-components
     title: 可复用组件
   - id: forms

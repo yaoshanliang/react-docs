@@ -562,7 +562,7 @@ section.black content {
 
 p {
   margin: 10px 0;
-  line-height: 30px;
+  line-height: 28px;
 }
 
 .highlight {
@@ -577,6 +577,10 @@ figure {
 .inner-content {
   float: right;
   width: $skinnyContentWidth;
+
+  h3 {
+    margin-top: 40px;
+  }
 }
 
 .nosidebar .inner-content {
