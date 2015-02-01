@@ -4,19 +4,19 @@ title: 教程
 prev: getting-started.html
 next: thinking-in-react.html
 ---
-我们将构建一个简单却真实的评论框，你可以将它放入你的博客，类似disqus，livefyre，facebook评论的基础版本。
+我们将构建一个简单却真实的评论框，你可以将它放入你的博客，类似disqus、livefyre、facebook提供的实时评论的基础版。
 
-我们将提供：
+我们将提供以下内容：
 
 * 一个展示所有评论的视图
 * 一个提交评论的表单
-* 构建自定制后台的钩子函数
+* 用于构建自定制后台的接口链接（hooks）
 
-同时也有一些简洁利索的特性：
+同时也包含一些简洁的特性：
 
-* **快速地评论：** 评论将会在其被保存到服务器之前在列表中展示出来，因此感觉很快。
-* **实时更新：** 其他用户的评论将会实时展示在评论列表。
-* **Markdown格式：** 用户可以使用MarkDown来格式化他们的文本。
+* **评论体验优化：** 评论在保存到服务器之前就展现在评论列表，因此用户体验很快。
+* **实时更新：** 其他用户的评论将会实时展示。
+* **Markdown格式：** 用户可以使用MarkDown格式来编辑文本。
 
 ### 想要跳过所有的内容，只查看源代码？
 
@@ -24,9 +24,9 @@ next: thinking-in-react.html
 
 ### <a class="anchor" name="running-a-server"></a>运行一个服务器
 
-尽管没必要通过这个教程来快速开始，但是接下来我们会添加一个功能，发送POST请求到一个运行的服务器。如果这是你相当熟悉的事情，而且你想创建你自己的服务器，那么就这样干吧。对于另外的一部分人，你们可能想集中精力学习React，而不用担忧服务器端方面，我们已经用了以下一系列的语言写好了简单的服务器代码 -JavaScript（使用Node.js），Python和Ruby。所有的都可以在GitHub上找到。你可以[查看代码](ttps://github.com/reactjs/react-tutorial/)或者[下载zip文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
+虽然它不是入门教程的必需品，但接下来我们会添加一个功能，发送 `POST` ing请求到服务器。如果这是你熟知的事并且你想创建你自己的服务器，那么就这样干吧。而对于另外的一部分人，为了让你集中精力学习，而不用担忧服务器端方面，我们已经用了以下一系列的语言编写了简单的服务器代码 - JavaScript（使用Node.js），Python和Ruby。所有代码都在GitHub。你可以[查看代码](ttps://github.com/reactjs/react-tutorial/)或者[下载zip文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
 
-要通过下载的这些东西开始学习，只需要编辑`public/index.html`。
+开始使用下载的教程，只需开始编辑 `public/index.html` 。
 
 ### 开始学习
 
@@ -50,15 +50,15 @@ next: thinking-in-react.html
 </html>
 ```
 
-在这篇教程接下来的部分，我们将在这个script标签中书写我们的JavaScript代码。
+在本教程其余的部分，我们将在此script标签中编写我们的JavaScript代码。
 
 > 注意：
 >
-> 因为我们想简化接下来的ajax请求代码，所以在这里引入jQuery，但是使用React并不强制要求引入jQuery。
+> 因为我们想简化ajax请求代码，所以在这里引入jQuery，但是它对 React 并不是必须的。
 
 ### 你的第一个组件
 
-React中全是模块化的可组装的组件。在我们的评论框例子中，我们将有如下的组件结构：
+React中全是模块化、可组装的组件。以我们的评论框为例，我们将有如下的组件结构：
 
 ```
 - CommentBox
@@ -67,7 +67,7 @@ React中全是模块化的可组装的组件。在我们的评论框例子中，
   - CommentForm
 ```
 
-让我们构造`CommentBox`组件，该组件仅为一个简单的`<div>`：
+让我们构造`CommentBox`组件，它只是一个简单的 `<div>` 而已：
 
 ```javascript
 // tutorial1.js

@@ -1,30 +1,31 @@
 ---
 id: transferring-props
-title: Transferring Props
+title: 传递 Props
 permalink: transferring-props.html
 prev: reusable-components.html
 next: forms.html
 ---
 
-It's a common pattern in React to wrap a component in an abstraction. The outer component exposes a simple property to do something that might have more complex implementation details.
+React 里有一个非常常用的模式就是对组件做一层抽象。组件对外公开一个简单的属性（Props）来实现功能，但内部细节可能有非常复杂的实现。
 
-You can use [JSX spread attributes](/react/docs/jsx-spread.html) to merge the old props with additional values:
+可以使用 [JSX 展开属性](/react/docs/jsx-spread-zh-CN.html) 来合并现有的 props 和其它值：
 
 ```javascript
 return <Component {...this.props} more="values" />;
 ```
 
-If you don't use JSX, you can use any object helper such as ES6 `Object.assign` or Underscore `_.extend`:
+如果不使用 JSX，可以使用一些对象辅助方法如 ES6 的 `Object.assign` 或 Underscore `_.extend`。
 
 ```javascript
 return Component(Object.assign({}, this.props, { more: 'values' }));
 ```
 
-The rest of this tutorial explains best practices. It uses JSX and experimental ES7 syntax.
+下面的教程介绍一些最佳实践。使用了 JSX 和 ES7 的还在试验阶段的特性。
 
-## Manual Transfer
 
-Most of the time you should explicitly pass the properties down. That ensures that you only expose a subset of the inner API, one that you know will work.
+## 手动传递
+
+大部分情况下你应该显式地向下传递 props。这样可以确保只公开你认为是安全的内部 API 的子集。
 
 ```javascript
 var FancyCheckbox = React.createClass({
@@ -45,26 +46,27 @@ React.render(
 );
 ```
 
-But what about the `name` prop? Or the `title` prop? Or `onMouseOver`?
+但 `name` 这个属性怎么办？还有 `title`、`onMouseOver` 这些 props？
 
-## Transferring with `...` in JSX
 
-Sometimes it's fragile and tedious to pass every property along. In that case you can use [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) with rest properties to extract a set of unknown properties.
+## 在 JSX 里使用 `...` 传递
 
-List out all the properties that you would like to consume, followed by `...other`.
+有时把所有属性都传下去是不安全或啰嗦的。这时可以使用 [解构赋值](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) 中的剩余属性特性来把未知属性批量提取出来。
+
+列出所有要当前使用的属性，后面跟着 `...other`。
 
 ```javascript
 var { checked, ...other } = this.props;
 ```
 
-This ensures that you pass down all the props EXCEPT the ones you're consuming yourself.
+这样能确保把所有 props 传下去，*除了* 那些已经被使用了的。
 
 ```javascript
 var FancyCheckbox = React.createClass({
   render: function() {
     var { checked, ...other } = this.props;
     var fancyClass = checked ? 'FancyChecked' : 'FancyUnchecked';
-    // `other` contains { onClick: console.log } but not the checked property
+    // `other` 包含 { onClick: console.log } 但 checked 属性除外
     return (
       <div {...other} className={fancyClass} />
     );
@@ -78,17 +80,17 @@ React.render(
 );
 ```
 
-> NOTE:
+> 注意:
 > 
-> In the example above, the `checked` prop is also a valid DOM attribute. If you didn't use destructuring in this way you might inadvertently pass it along.
+> 上面例子中，`checked` 属性也是一个有效的 DOM 属性。如果你没有使用解构赋值，那么可能无意中把它传下去。
 
-Always use the destructuring pattern when transferring unknown `other` props.
+在传递这些未知的 `other` 属性时，要经常使用解构赋值模式。
 
 ```javascript
 var FancyCheckbox = React.createClass({
   render: function() {
     var fancyClass = this.props.checked ? 'FancyChecked' : 'FancyUnchecked';
-    // ANTI-PATTERN: `checked` would be passed down to the inner component
+    // 反模式：`checked` 会被传到里面的组件里
     return (
       <div {...this.props} className={fancyClass} />
     );
@@ -96,9 +98,10 @@ var FancyCheckbox = React.createClass({
 });
 ```
 
-## Consuming and Transferring the Same Prop
 
-If your component wants to consume a property but also pass it along, you can repass it explicitly `checked={checked}`. This is preferable to passing the full `this.props` object since it's easier to refactor and lint.
+## 使用和传递同一个 Prop
+
+如果组件需要使用一个属性又要往下传递，可以直接使用 `checked={checked}` 再传一次。这样做比传整个 `this.props` 对象要好，因为更利于重构和语法检查。
 
 ```javascript
 var FancyCheckbox = React.createClass({
@@ -120,15 +123,16 @@ var FancyCheckbox = React.createClass({
 });
 ```
 
-> NOTE:
+> 注意:
 > 
-> Order matters. By putting the `{...other}` before your JSX props you ensure that the consumer of your component can't override them. In the example above we have guaranteed that the input will be of type `"checkbox"`.
+> 顺序很重要，把 `{...other}` 放到 JSX props 前面会使它不被覆盖。上面例子中我们可以保证 input 的 type 是 `"checkbox"`。
 
-## Rest and Spread Properties `...`
 
-Rest properties allow you to extract the remaining properties from an object into a new object. It excludes every other property listed in the destructuring pattern.
+## 剩余属性和展开属性 `...`
 
-This is an experimental implementation of an [ES7 proposal](https://github.com/sebmarkbage/ecmascript-rest-spread).
+剩余属性可以把对象剩下的属性提取到一个新的对象。会把所有在解构赋值中列出的属性剔除。
+
+这是 [ES7 草案](https://github.com/sebmarkbage/ecmascript-rest-spread) 中的试验特性。
 
 ```javascript
 var { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
@@ -137,14 +141,14 @@ y; // 2
 z; // { a: 3, b: 4 }
 ```
 
-> Note:
+> 注意:
 >
-> Use the [JSX command-line tool](http://npmjs.org/package/react-tools) with the `--harmony` flag to activate the experimental ES7 syntax.
+> 使用 [JSX 命令行工具](http://npmjs.org/package/react-tools) 配合 `--harmony` 标记来启用 ES7 语法。
 
-## Transferring with Underscore
 
-If you don't use JSX, you can use a library to achieve the same pattern. Underscore supports `_.omit` to filter out properties and `_.extend` to copy properties onto a new object.
+## 使用 Underscore 来传递
 
+如果不使用 JSX，可以使用一些库来实现相同效果。Underscore 提供 `_.omit` 来过滤属性，`_.extend` 复制属性到新的对象。
 ```javascript
 var FancyCheckbox = React.createClass({
   render: function() {

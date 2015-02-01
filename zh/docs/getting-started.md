@@ -1,6 +1,6 @@
 ---
 id: getting-started
-title: 入门教程
+title: 快速开始
 next: tutorial.html
 redirect_from: "docs/index.html"
 ---
@@ -22,7 +22,7 @@ redirect_from: "docs/index.html"
   </a>
 </div>
 
-In the root directory of the starter kit, create a `helloworld.html` with the following contents.
+在初学者教程包的根目录，创建一个包含以下内容的 `helloworld.html`。
 
 ```html
 <!DOCTYPE html>
@@ -106,12 +106,12 @@ React.render(
 
 ## 想要遵循 CommonJS?
 
-If you want to use React with [browserify](http://browserify.org/), [webpack](http://webpack.github.io/), or another CommonJS-compatible module system, just use the [`react` npm package](https://www.npmjs.org/package/react). In addition, the `jsx` build tool can be integrated into most packaging systems (not just CommonJS) quite easily.
+如果你想在使用 React 时，遵循 [browserify](http://browserify.org/)，[webpack](http://webpack.github.io/) 或者或其它兼容CommonJS的模块系统，只要使用 [`react` npm package](https://www.npmjs.org/package/react) 即可。而且，`jsx` 转换工具可以很轻松的地集成到大部分打包系统里（不仅仅是 CommonJS）。
 
-## Next Steps
+## 下一步
 
-Check out [the tutorial](/react/docs/tutorial.html) and the other examples in the starter kit's `examples` directory to learn more. 
+接着学习更多 [入门教程](/react/docs/tutorial.html) 和初学者教程包 `examples` 目录下的其它例子。
 
-We also have a wiki where the community contributes with [workflows, UI-components, routing, data management etc.](https://github.com/facebook/react/wiki/Complementary-Tools)
+我们还有一个社区开发者共同建设的 Wiki：[workflows, UI-components, routing, data management etc.](https://github.com/facebook/react/wiki/Complementary-Tools)
 
-Good luck, and welcome!
+祝你好运，欢迎来到 React 的世界。
