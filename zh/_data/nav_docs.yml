@@ -52,7 +52,7 @@
     - id: pure-render-mixin
       title: PureRenderMixin
     - id: perf
-      title: 性能工具
+      title: 性能分析工具
 - title: 社区资源
   items:
   - id: videos
