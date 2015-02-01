@@ -46,7 +46,7 @@
     - id: test-utils
       title: 测试套件
     - id: clone-with-props
-      title: Cloning Components
+      title: 克隆组件
     - id: update
       title: Immutability Helpers
     - id: pure-render-mixin
