@@ -1,22 +1,21 @@
 ---
 id: multiple-components
-title: Multiple Components
+title: 复合组件
 permalink: multiple-components.html
 prev: interactivity-and-dynamic-uis.html
 next: reusable-components.html
 ---
 
-So far, we've looked at how to write a single component to display data and handle user input. Next let's examine one of React's finest features: composability.
+目前为止，我们已经学了如何用单个组件来展示数据和处理用户输入。下一步让我们来体验 React 最激动人心的特性之一：可组合性（composability）。
 
 
-## Motivation: Separation of Concerns
+## 动机：关注分离
 
-By building modular components that reuse other components with well-defined interfaces, you get much of the same benefits that you get by using functions or classes. Specifically you can *separate the different concerns* of your app however you please simply by building new components. By building a custom component library for your application, you are expressing your UI in a way that best fits your domain.
+通过复用那些接口定义良好的组件来开发新的模块化组件，我们得到了与使用函数和类相似的好处。具体来说就是能够通过开发简单的组件把程序的*不同关注面分离*。如果为程序开发一套自定义的组件库，那么就能以最适合业务场景的方式来展示你的用户界面。
 
+## 组合实例
 
-## Composition Example
-
-Let's create a simple Avatar component which shows a profile picture and username using the Facebook Graph API.
+一起来使用 Facebook Graph API 开发显示个人图片和用户名的简单 Avatar 组件吧。
 
 ```javascript
 var Avatar = React.createClass({
@@ -55,66 +54,64 @@ React.render(
 ```
 
 
-## Ownership
+## 从属关系
 
-In the above example, instances of `Avatar` *own* instances of `ProfilePic` and `ProfileLink`. In React, **an owner is the component that sets the `props` of other components**. More formally, if a component `X` is created in component `Y`'s `render()` method, it is said that `X` is *owned by* `Y`. As discussed earlier, a component cannot mutate its `props` — they are always consistent with what its owner sets them to. This key property leads to UIs that are guaranteed to be consistent.
+上面例子中，`Avatar` 拥有 `ProfilePic` 和 `ProfileLink` 的实例。`拥有者` 就是给其它组件设置 `props` 的那个组件。更正式地说，
+如果组件 `Y` 在 `render()` 方法是创建了组件 `X`，那么 `Y` 就拥有 `X`。上面讲过，组件不能修改自身的 `props` - 它们总是与它们拥有者设置的保持一致。这是保持用户界面一致性的关键性原则。
 
-It's important to draw a distinction between the owner-ownee relationship and the parent-child relationship. The owner-ownee relationship is specific to React, while the parent-child relationship is simply the one you know and love from the DOM. In the example above, `Avatar` owns the `div`, `ProfilePic` and `ProfileLink` instances, and `div` is the **parent** (but not owner) of the `ProfilePic` and `ProfileLink` instances.
+把从属关系与父子关系加以区别至关重要。从属关系是 React 特有的，而父子关系简单来讲就是DOM 里的标签的关系。在上一个例子中，`Avatar` 拥有 `div`、`ProfilePic` 和 `ProfileLink` 实例，`div` 是 `ProfilePic` 和 `ProfileLink` 实例的**父级**（但不是拥有者）。
 
 
-## Children
+## 子级
 
-When you create a React component instance, you can include additional React components or JavaScript expressions between the opening and closing tags like this:
+实例化 React 组件时，你可以在开始标签和结束标签之间引用在React 组件或者Javascript 表达式：
 
 ```javascript
 <Parent><Child /></Parent>
 ```
 
-`Parent` can read its children by accessing the special `this.props.children` prop. **`this.props.children` is an opaque data structure:** use the [React.Children utilities](/react/docs/top-level-api.html#react.children) to manipulate them.
+`Parent` 能通过专门的 `this.props.children`  props 读取子级。**`this.props.children` 是一个不透明的数据结构：** 通过 [React.Children 工具类](/react/docs/top-level-api.html#react.children) 来操作。
 
+### 子级校正（Reconciliation）
 
-### Child Reconciliation
-
-**Reconciliation is the process by which React updates the DOM with each new render pass.** In general, children are reconciled according to the order in which they are rendered. For example, suppose two render passes generate the following respective markup:
+**校正就是每次 render 方法调用后 React 更新 DOM 的过程。** 一般情况下，子级会根据它们被渲染的顺序来做校正。例如，下面代码描述了两次渲染的过程：
 
 ```html
-// Render Pass 1
+// 第一次渲染
 <Card>
   <p>Paragraph 1</p>
   <p>Paragraph 2</p>
 </Card>
-// Render Pass 2
+// 第二次渲染
 <Card>
   <p>Paragraph 2</p>
 </Card>
 ```
 
-Intuitively, `<p>Paragraph 1</p>` was removed. Instead, React will reconcile the DOM by changing the text content of the first child and destroying the last child. React reconciles according to the *order* of the children.
+直观来看，只是删除了`<p>Paragraph 1</p>`。事实上，React 先更新第一个子级的内容，然后删除最后一个组件。React 是根据子级的*顺序*来校正的。
 
+### 子组件状态管理
 
-### Stateful Children
+对于大多数组件，这没什么大碍。但是，对于使用 `this.state` 来在多次渲染过程中里维持数据的状态化组件，这样做潜在很多问题。
 
-For most components, this is not a big deal. However, for stateful components that maintain data in `this.state` across render passes, this can be very problematic.
-
-In most cases, this can be sidestepped by hiding elements instead of destroying them:
+多数情况下，可以通过隐藏组件而不是删除它们来绕过这些问题。
 
 ```html
-// Render Pass 1
+// 第一次渲染
 <Card>
   <p>Paragraph 1</p>
   <p>Paragraph 2</p>
 </Card>
-// Render Pass 2
+// 第二次渲染
 <Card>
   <p style={{'{{'}}display: 'none'}}>Paragraph 1</p>
   <p>Paragraph 2</p>
 </Card>
 ```
 
+### 动态子级
 
-### Dynamic Children
-
-The situation gets more complicated when the children are shuffled around (as in search results) or if new components are added onto the front of the list (as in streams). In these cases where the identity and state of each child must be maintained across render passes, you can uniquely identify each child by assigning it a `key`:
+如果子组件位置会改变（如在搜索结果中）或者有新组件添加到列表开头（如在流中）情况会变得更加复杂。如果子级要在多个渲染阶段保持自己的特征和状态，在这种情况下，你可以通过给子级设置惟一标识的 `key` 来区分。
 
 ```javascript
   render: function() {
@@ -129,12 +126,11 @@ The situation gets more complicated when the children are shuffled around (as in
   }
 ```
 
-When React reconciles the keyed children, it will ensure that any child with `key` will be reordered (instead of clobbered) or destroyed (instead of reused).
-
-The `key` should *always* be supplied directly to the components in the array, not to the container HTML child of each component in the array:
+当 React 校正带有 key 的子级时，它会确保它们被重新排序（而不是破坏）或者删除（而不是重用）。
+`务必` 把 `key` 添加到子级数组里组件本身上，而不是每个子级内部最外层 HTML 上：
 
 ```javascript
-// WRONG!
+// 错误！
 var ListItemWrapper = React.createClass({
   render: function() {
     return <li key={this.props.data.id}>{this.props.data.text}</li>;
@@ -152,7 +148,7 @@ var MyComponent = React.createClass({
   }
 });
 
-// Correct :)
+// 正确 :)
 var ListItemWrapper = React.createClass({
   render: function() {
     return <li>{this.props.data.text}</li>;
@@ -171,16 +167,16 @@ var MyComponent = React.createClass({
 });
 ```
 
-You can also key children by passing an object. The object keys will be used as `key` for each value. However it is important to remember that JavaScript does not guarantee the ordering of properties will be preserved. In practice browsers will preserve property order **except** for properties that can be parsed as 32-bit unsigned integers. Numeric properties will be ordered sequentially and before other properties. If this happens React will render components out of order. This can be avoided by adding a string prefix to the key:
+也可以传递 object 来做有 key 的子级。object 的 key 会被当作每个组件的 `key`。但是一定要牢记 JavaScript 并不总是保证属性的顺序会被保留。实际情况下浏览器一般会保留属性的顺序，**除了** 使用 32位无符号数字做为 key 的属性。数字型属性会按大小排序并且排在其它属性前面。一旦发生这种情况，React 渲染组件的顺序就是混乱。可能在 key 前面加一个字符串前缀来避免：
 
 ```javascript
   render: function() {
     var items = {};
 
     this.props.results.forEach(function(result) {
-      // If result.id can look like a number (consider short hashes), then
-      // object iteration order is not guaranteed. In this case, we add a prefix
-      // to ensure the keys are strings.
+      // 如果 result.id 看起来是一个数字（比如短哈希），那么
+      // 对象字面量的顺序就得不到保证。这种情况下，需要添加前缀
+      // 来确保 key 是字符串。
       items['result-' + result.id] = <li>{result.text}</li>;
     });
 
@@ -192,17 +188,17 @@ You can also key children by passing an object. The object keys will be used as 
   }
 ```
 
-## Data Flow
+## 数据流
 
-In React, data flows from owner to owned component through `props` as discussed above. This is effectively one-way data binding: owners bind their owned component's props to some value the owner has computed based on its `props` or `state`. Since this process happens recursively, data changes are automatically reflected everywhere they are used.
+React 里，数据通过上面介绍过的 `props` 从拥有者流向归属者。这就是高效的单向数据绑定(one-way data binding)：拥有者通过它的 `props` 或 `state` 计算出一些值，并把这些值绑定到它们拥有的组件的 props 上。因为这个过程会递归地调用，所以数据变化会自动在所有被使用的地方自动反映出来。
 
 
-## A Note on Performance
+## 性能提醒
 
-You may be thinking that it's expensive to react to changing data if there are a large number of nodes under an owner. The good news is that JavaScript is fast and `render()` methods tend to be quite simple, so in most applications this is extremely fast. Additionally, the bottleneck is almost always the DOM mutation and not JS execution and React will optimize this for you using batching and change detection.
+你或许会担心如果一个拥有者有大量子级时，对于数据变化做出响应非常耗费性能。值得庆幸的是执行 JavaScript  非常的快，而且 `render()` 方法一般比较简单，所以在大部分应用里这样做速度极快。此外，性能的瓶颈大多是因为 DOM 更新，而非 JS 执行，而且 React 会通过批量更新和变化检测来优化性能。
 
-However, sometimes you really want to have fine-grained control over your performance. In that case, simply override `shouldComponentUpdate()` to return false when you want React to skip processing of a subtree. See [the React reference docs](/react/docs/component-specs.html) for more information.
+但是，有时候需要做细粒度的性能控制。这种情况下，可以重写 `shouldComponentUpdate()` 方法返回 false 来让 React 跳过对子树的处理。参考 [React reference docs](/react/docs/component-specs.html) 了解更多。
 
-> Note:
->
-> If `shouldComponentUpdate()` returns false when data has actually changed, React can't keep your UI in sync. Be sure you know what you're doing while using it, and only use this function when you have a noticeable performance problem. Don't underestimate how fast JavaScript is relative to the DOM.
+> 注意：
+> 
+> 如果在数据变化时让 `shouldComponentUpdate()` 返回 false，React 就不能保证用户界面同步。当使用它的时候一定确保你清楚到底做了什么，并且只在遇到明显性能问题的时候才使用它。不要低估 JavaScript 的速度，DOM 操作通常才是慢的原因。
