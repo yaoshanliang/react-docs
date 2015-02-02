@@ -1,6 +1,6 @@
 ---
 id: addons
-title: Add-ons
+title: 插件
 permalink: addons.html
 prev: tooling-integration.html
 next: animation.html
@@ -15,10 +15,10 @@ next: animation.html
 - [`update`](update.html), a helper function that makes dealing with immutable data in JavaScript easier.
 - [`PureRenderMixin`](pure-render-mixin.html), a performance booster under certain situations.
 
-The add-ons below are in the development (unminified) version of React only:
+以下插件只存在于 React 开发版（未压缩）：
 
-- [`TestUtils`](test-utils.html), simple helpers for writing test cases (unminified build only).
-- [`Perf`](perf.html), for measuring performance and giving you hint where to optimize.
+- [`测试工具集`](test-utils.html), 帮助你编写测试用例（仅存在于未压缩版）.
+- [`性能分析工具`](perf.html), 用于性能测评，并帮助你检查出可以优化的点。
 
 To get the add-ons, use `react-with-addons.js` (and its minified counterpart) rather than the common `react.js`.
 

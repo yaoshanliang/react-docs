@@ -1,6 +1,6 @@
 ---
 layout: page
-title: A JavaScript library for building user interfaces
+title: 用于构建用户界面的JAVASCRIPT库
 id: home
 ---
 
@@ -64,7 +64,7 @@ id: home
     <div class="example">
       <h3>一个使用外部插件的组件</h3>
       <p>
-        React是灵活的，并且提供钩子函数允许你跟其他库和框架对接。<br/>
+        React是灵活的，并且提供方法允许你跟其他库和框架对接。<br/>
         下面例子展现了一个案例，使用外部库Markdown实时转化textarea的值。
       </p>
       <div id="markdownExample"></div>

@@ -1,11 +1,11 @@
 - title: 快速入门
   items:
   - id: getting-started
-    title: 入门教程
+    title: 快速开始
   - id: tutorial
     title: 教程
   - id: thinking-in-react
-    title: 深入思考React
+    title: 深入理解React
 - title: 指南
   items:
   - id: why-react
@@ -25,8 +25,10 @@
     title: 复合组件
   - id: reusable-components
     title: 可复用组件
+  - id: transferring-props
+    title: 传递 Props
   - id: forms
-    title: 表单
+    title: 表单组件
   - id: working-with-the-browser
     title: 浏览器中的工作原理
     subitems:
@@ -44,7 +46,7 @@
     - id: class-name-manipulation
       title: 类名操作
     - id: test-utils
-      title: 测试套件
+      title: 测试工具集
     - id: clone-with-props
       title: 克隆组件
     - id: update
@@ -58,7 +60,7 @@
   - id: videos
     title: 视频
   - id: complementary-tools
-    title: 补充工具
+    title: 其余工具
   - id: examples
     title: 范例
 - title: Reference
