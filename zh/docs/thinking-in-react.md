@@ -7,16 +7,16 @@ next: videos.html
 
 这是一篇源自 [官方博客](/react/blog) 的 [文章](/react/blog/2013/11/05/thinking-in-react.html)
 
-据我所知，React是最早使用JavaScript构建大型、快速的Web应用程序的技术方案。它已经被我们广泛应用于 Facebook 和 Instagram。
+据我所知，React是较早使用JavaScript构建大型、快速的Web应用程序的技术方案。它已经被我们广泛应用于 Facebook 和 Instagram。
 
-React众多优秀特征中的其中一部分就是，教会你去思考如何构建应用程序。
+React众多优秀特征中的其中一部分就是，教会你去重新思考如何构建应用程序。
 
 本文中，我将跟你一起使用 React 构建一个具备搜索功能的产品列表。 
 **注意：假如你无法看到页面上嵌入的jsfiddles，请确认你使用的 `http` 请求而非 `https`**
 
-## 从原型(mock)开始
+## 从原型（mock）开始
 
-假设我们已经拥有了一个JSON接口和设计师设计的原型。我们的设计师显然不够好，因为原型看起来如下：
+假设我们已经拥有了一个JSON API和设计师设计的原型。我们的设计师显然不够好，因为原型看起来如下：
 
 ![Mockup](/react/img/blog/thinking-in-react-mock.png)
 
@@ -37,20 +37,21 @@ JSON接口返回数据如下：
 
 你要做的第一件事是，为所有组件（及子组件）命名并画上线框图。假如你和设计师一起工作，也许他们已经完成了这项工作，所以赶紧去跟他们沟通！他们的 Photoshop 图层名也许最终可以直接用于你的 React 组件名。
 
-But how do you know what should be its own component? Just use the same techniques for deciding if you should create a new function or object. One such technique is the [single responsibility principle](http://en.wikipedia.org/wiki/Single_responsibility_principle), that is, a component should ideally only do one thing. If it ends up growing it should be decomposed into smaller subcomponents.
+然而你如何知道哪些才能成为组件？想象一下，当你创建一些函数或对象时，用到一些类似的技术。其中一项技术就是 [单一功能原则](http://en.wikipedia.org/wiki/Single_responsibility_principle)，指的是，理想状态下一个组件应该只做一件事，假如它功能逐渐变大就需要被拆分成更小的子组件。
 
-Since you're often displaying a JSON data model to a user, you'll find that if your model was built correctly your UI (and therefore your component structure) will map nicely onto it. That's because user interfaces and data models tend to adhere to the same *information architecture* which means the work of separating your UI into components is often trivial. Just break it up into components that represent exactly one piece of your data model.
+由于你经常需要将一个JSON数据模型展示给用户，因此你需要检查这个模型结构是否正确以便你的UI(在这里指组件结构)是否能够正确的映射到这个模型上。这是因为用户界面和数据模型在 *信息构造* 方面都要一直，这意味着将你可以省下很多将UI分割成组件的麻烦事。你需要做的仅仅只是将数据模型分隔成一小块一小块的组件以便它们都能够表示成组件。
 
 ![Component diagram](/react/img/blog/thinking-in-react-components.png)
 
-You'll see here that we have five components in our simple app. I've italicized the data each component represents.
+由此可见，我们的app中包含五个组件。下面我已经用 斜体 标示出每个组件对应的数据。
 
-  1. **`FilterableProductTable` (orange):** contains the entirety of the example
-  2. **`SearchBar` (blue):** receives all *user input*
-  3. **`ProductTable` (green):** displays and filters the *data collection* based on *user input*
-  4. **`ProductCategoryRow` (turquoise):** displays a heading for each *category*
-  5. **`ProductRow` (red):** displays a row for each *product*
+  1. **`FilterableProductTable` (橘色):** 包含整个例子的容器
+  2. **`SearchBar` (蓝色):** 接受所有 *用户输入(user input)*
+  3. **`ProductTable` (绿色):** 根据 *用户输入(user input)* 过滤和展示 *数据集合(data collection)*
+  4. **`ProductCategoryRow` (青色):** 为每个 *分类(category)* 展示一列表头
+  5. **`ProductRow` (红色):** 为每个 *产品(product)* 展示一列
 
+如果你仔细观察 `ProductTable`，你会发现表头（包含"Name"和"Price"标签 2个部分）并不是单独的组件。
 If you look at `ProductTable` you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference and there's an argument to be made either way. For this example I left it as part of `ProductTable` because it is part of rendering the *data collection* which is `ProductTable`'s responsibility. However if this header grows to be complex (i.e. if we were to add affordances for sorting) it would certainly make sense to make this its own `ProductTableHeader` component.
 
 Now that we've identified the components in our mock, let's arrange them into a hierarchy. This is easy. Components that appear within another component in the mock should appear as a child in the hierarchy:
