@@ -5,14 +5,17 @@ prev: tutorial.html
 next: videos.html
 ---
 
-这是一篇源自 [官方博客](/react/blog) 的 [文章](/react/blog/2013/11/05/thinking-in-react.html)
+这是一篇源自 [官方博客](/react/blog) 的 [文章](/react/blog/2013/11/05/thinking-in-react.html)。
 
-据我所知，React是较早使用JavaScript构建大型、快速的Web应用程序的技术方案。它已经被我们广泛应用于 Facebook 和 Instagram。
+在我看来，React是较早使用JavaScript构建大型、快速的Web应用程序的技术方案。它已经被我们广泛应用于 Facebook 和 Instagram。
 
 React众多优秀特征中的其中一部分就是，教会你去重新思考如何构建应用程序。
 
-本文中，我将跟你一起使用 React 构建一个具备搜索功能的产品列表。 
-**注意：假如你无法看到页面上嵌入的jsfiddles，请确认你使用的 `http` 请求而非 `https`**
+本文中，我将跟你一起使用 React 构建一个具备搜索功能的产品列表。
+
+> **注意：**
+>
+> 如果你无法看到本页内嵌的代码片段，请确认你不是用`https`协议加载本页的。
 
 ## 从原型（mock）开始
 
@@ -33,23 +36,23 @@ JSON接口返回数据如下：
 ];
 ```
 
-## 第一步: 拆分用户界面为一个组件树
+## 第一步：拆分用户界面为一个组件树
 
 你要做的第一件事是，为所有组件（及子组件）命名并画上线框图。假如你和设计师一起工作，也许他们已经完成了这项工作，所以赶紧去跟他们沟通！他们的 Photoshop 图层名也许最终可以直接用于你的 React 组件名。
 
 然而你如何知道哪些才能成为组件？想象一下，当你创建一些函数或对象时，用到一些类似的技术。其中一项技术就是 [单一功能原则](http://en.wikipedia.org/wiki/Single_responsibility_principle)，指的是，理想状态下一个组件应该只做一件事，假如它功能逐渐变大就需要被拆分成更小的子组件。
 
-由于你经常需要将一个JSON数据模型展示给用户，因此你需要检查这个模型结构是否正确以便你的UI(在这里指组件结构)是否能够正确的映射到这个模型上。这是因为用户界面和数据模型在 *信息构造* 方面都要一直，这意味着将你可以省下很多将UI分割成组件的麻烦事。你需要做的仅仅只是将数据模型分隔成一小块一小块的组件以便它们都能够表示成组件。
+由于你经常需要将一个JSON数据模型展示给用户，因此你需要检查这个模型结构是否正确以便你的UI（在这里指组件结构）是否能够正确的映射到这个模型上。这是因为用户界面和数据模型在 *信息构造* 方面都要一直，这意味着将你可以省下很多将UI分割成组件的麻烦事。你需要做的仅仅只是将数据模型分隔成一小块一小块的组件，以便它们都能够表示成组件。
 
 ![Component diagram](/react/img/blog/thinking-in-react-components.png)
 
 由此可见，我们的app中包含五个组件。下面我已经用 斜体 标示出每个组件对应的数据。
 
-  1. **`FilterableProductTable` (橘色):** 包含整个例子的容器
-  2. **`SearchBar` (蓝色):** 接受所有 *用户输入(user input)*
-  3. **`ProductTable` (绿色):** 根据 *用户输入(user input)* 过滤和展示 *数据集合(data collection)*
-  4. **`ProductCategoryRow` (青色):** 为每个 *分类(category)* 展示一列表头
-  5. **`ProductRow` (红色):** 为每个 *产品(product)* 展示一列
+  1. **`FilterableProductTable` （橘色）：** 包含整个例子的容器
+  2. **`SearchBar` （蓝色）：** 接受所有 *用户输入(user input)*
+  3. **`ProductTable` （绿色）：** 根据 *用户输入(user input)* 过滤和展示 *数据集合(data collection)*
+  4. **`ProductCategoryRow` （青色）：** 为每个 *分类(category)* 展示一列表头
+  5. **`ProductRow` （红色）：** 为每个 *产品(product)* 展示一列
 
 如果你仔细观察 `ProductTable`，你会发现表头（包含"Name"和"Price"标签 2个部分）并不是单独的组件。
 If you look at `ProductTable` you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference and there's an argument to be made either way. For this example I left it as part of `ProductTable` because it is part of rendering the *data collection* which is `ProductTable`'s responsibility. However if this header grows to be complex (i.e. if we were to add affordances for sorting) it would certainly make sense to make this its own `ProductTableHeader` component.
