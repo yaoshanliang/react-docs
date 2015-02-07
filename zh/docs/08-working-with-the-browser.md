@@ -6,27 +6,27 @@ prev: forms.html
 next: more-about-refs.html
 ---
 
-React provides powerful abstractions that free you from touching the DOM directly in most cases, but sometimes you simply need to access the underlying API, perhaps to work with a third-party library or existing code.
+React提供了强大的抽象，让你在大多数应用场景中不再直接操作DOM，但是有时你需要简单地调用底层的API，或者借助于第三方库或已有的代码。
 
 
 ## 虚拟DOM
 
-React is so fast because it never talks to the DOM directly. React maintains a fast in-memory representation of the DOM. `render()` methods return a *description* of the DOM, and React can diff this description with the in-memory representation to compute the fastest way to update the browser.
+React是很快的，因为它从不直接操作DOM。React在内存中维护一个快速响应的DOM描述。`render()`方法返回一个DOM的*描述*，React能够利用内存中的描述来快速地计算出差异，然后更新浏览器中的DOM。
 
-Additionally, React implements a full synthetic event system such that all event objects are guaranteed to conform to the W3C spec despite browser quirks, and everything bubbles consistently and in a performant way cross-browser. You can even use some HTML5 events in IE8!
+另外，React实现了一个完备的虚拟事件系统，尽管各个浏览器都有自己的怪异行为，React确保所有事件对象都确保符合W3C规范，并且持续冒泡，用一种高性能的方式跨浏览器（and everything bubbles consistently and in a performant way cross-browser）。你甚至可以在IE8中使用一些HTML5的事件！
 
-Most of the time you should stay within React's "faked browser" world since it's more performant and easier to reason about. However, sometimes you simply need to access the underlying API, perhaps to work with a third-party library like a jQuery plugin. React provides escape hatches for you to use the underlying DOM API directly.
+大多数时候你应该呆在React的“虚拟浏览器”世界里面，因为它性能更加好，并且容易思考。但是，有时你简单地需要调用底层的API，或许借助于第三方的类似于jQuery插件这种库。React为你提供了直接使用底层DOM API的途径。
 
 
-## Refs and getDOMNode()
+## Refs和getDOMNode()
 
-To interact with the browser, you'll need a reference to a DOM node. Every mounted React component has a `getDOMNode()` function which you can call to get a reference to it.
+为了和浏览器交互，你将需要对DOM节点的引用。每一个挂载的React组件有一个`getDOMNode()`方法，你可以调用这个方法来获取对该节点的引用。
 
-> Note:
+> 注意：
 >
-> `getDOMNode()` only works on mounted components (that is, components that have been placed in the DOM). If you try to call this on a component that has not been mounted yet (like calling `getDOMNode()` in `render()` on a component that has yet to be created) an exception will be thrown.
+> `getDOMNode()`仅在挂载的组件上有效（也就是说，组件已经被放进了DOM中）。如果你尝试在一个未被挂载的组件上调用这个函数（例如在创建组件的`render()`函数中调用`getDOMNode()`），将会抛出异常。
 
-In order to get a reference to a React component, you can either use `this` to get the current React component, or you can use refs to refer to a component you own. They work like this:
+为了获取一个到React组件的引用，你可以使用`this`来得到当前的React组件，或者你可以使用refs来指向一个你拥有的组件。它们像这样工作：
 
 ```javascript
 var MyComponent = React.createClass({
@@ -57,53 +57,97 @@ React.render(
 ```
 
 
-## More About Refs
+## 更多关于Refs
 
-To learn more about refs, including ways to use them effectively, see our [more about refs](/react/docs/more-about-refs.html) documentation.
-
-
-## Component Lifecycle
-
-Components have three main parts of their lifecycle:
-
-* **Mounting:** A component is being inserted into the DOM.
-* **Updating:** A component is being re-rendered to determine if the DOM should be updated.
-* **Unmounting:** A component is being removed from the DOM.
-
-React provides lifecycle methods that you can specify to hook into this process. We provide **will** methods, which are called right before something happens, and **did** methods which are called right after something happens.
+为了学习更多有关Refs的内容，包括如何有效地使用它们，参考我们的[更多关于Refs](/react/docs/more-about-refs.html)文档。
 
 
-### Mounting
+## 组件生命周期
 
-* `getInitialState(): object` is invoked before a component is mounted. Stateful components should implement this and return the initial state data.
-* `componentWillMount()` is invoked immediately before mounting occurs.
-* `componentDidMount()` is invoked immediately after mounting occurs. Initialization that requires DOM nodes should go here.
+组件的生命周期包含三个主要部分：
 
+* **挂载：** 组件被插入到DOM中。
+* **更新：** 组件被重新渲染，查明DOM是否应该刷新。
+* **移除：** 组件从DOM中移除。
 
-### Updating
-
-* `componentWillReceiveProps(object nextProps)` is invoked when a mounted component receives new props. This method should be used to compare `this.props` and `nextProps` to perform state transitions using `this.setState()`.
-* `shouldComponentUpdate(object nextProps, object nextState): boolean` is invoked when a component decides whether any changes warrant an update to the DOM. Implement this as an optimization to compare `this.props` with `nextProps` and `this.state` with `nextState` and return false if React should skip updating.
-* `componentWillUpdate(object nextProps, object nextState)` is invoked immediately before updating occurs. You cannot call `this.setState()` here.
-* `componentDidUpdate(object prevProps, object prevState)` is invoked immediately after updating occurs.
+React提供生命周期方法，你可以在这些方法中放入自己的代码。我们提供**will**方法，会在某些行为发生之前调用，和**did**方法，会在某些行为发生之后调用。
 
 
-### Unmounting
+### 挂载
 
-* `componentWillUnmount()` is invoked immediately before a component is unmounted and destroyed. Cleanup should go here.
-
-
-### Mounted Methods
-
-_Mounted_ composite components also support the following methods:
-
-* `getDOMNode(): DOMElement` can be invoked on any mounted component in order to obtain a reference to its rendered DOM node.
-* `forceUpdate()` can be invoked on any mounted component when you know that some deeper aspect of the component's state has changed without using `this.setState()`.
+* `getInitialState(): object`在组件被挂载之前调用。状态化的组件应该实现这个方法，返回初始的state数据。
+* `componentWillMount()`在挂载发生之前立即被调用。
+* `componentDidMount()`在挂载结束之后马上被调用。需要DOM节点的初始化操作应该放在这里。
 
 
-## Browser Support and Polyfills
+### 更新
 
+* `componentWillReceiveProps(object nextProps)`当一个挂载的组件接收到新的props的时候被调用。该方法应该用于比较`this.props`和`nextProps`，然互使用`this.setState()`来改变state。
+* `shouldComponentUpdate(object nextProps, object nextState): boolean`当组件做出是否要更新DOM的决定的时候被调用。实现该函数，优化`this.props`和`nextProps`，以及`this.state`和`nextState`的比较，如果不需要React更新DOM，则返回false。
+* `componentWillUpdate(object nextProps, object nextState)`在更新发生之前被调用。你可以在这里调用`this.setState()`。
+* `componentDidUpdate(object prevProps, object prevState)`在更新发生之后调用。
+
+
+### 移除
+
+* `componentWillUnmount()`在组件移除和销毁之前被调用。清理工作应该放在这里。
+
+
+### 挂载的方法（Mounted Methods）
+
+_挂载的_复合组件也支持如下方法：
+
+* `getDOMNode(): DOMElement`可以在任何挂载的组件上面调用，用于获取一个指向它的渲染DOM节点的引用。
+* `forceUpdate()`当你知道一些很深的组件state已经改变了的时候，可以在该组件上面调用，而不是使用`this.setState()`。
+
+
+## 浏览器支持和缺陷填充（Browser Support and Polyfills）
+
+在Facebook，我们支持老得浏览器，包括IE8。我们已经有写好的缺陷填充代码很长时间了，这能让我们写有远见的JS。这意味着我们没有零散的骇客代码充斥在我们的代码库里面，并且我们依然能够预计我们的代码“正常工作起来”。例如，不使用`+new Date()`，我们能够写`Date.now()`。
 At Facebook, we support older browsers, including IE8. We've had polyfills in place for a long time to allow us to write forward-thinking JS. This means we don't have a bunch of hacks scattered throughout our codebase and we can still expect our code to "just work". For example, instead of seeing `+new Date()`, we can just write `Date.now()`. Since the open source React is the same as what we use internally, we've carried over this philosophy of using forward thinking JS.
+
+In addition to that philosophy, we've also taken the stance that we, as authors of a JS library, should not be shipping polyfills as a part of our library. If every library did this, there's a good chance you'd be sending down the same polyfill multiple times, which could be a sizable chunk of dead code. If your product needs to support older browsers, chances are you're already using something like [es5-shim](https://github.com/kriskowal/es5-shim).
+
+
+### Polyfills Needed to Support Older Browsers
+
+`es5-shim.js` from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim) provides the following that React needs:
+
+* `Array.isArray`
+* `Array.prototype.every`
+* `Array.prototype.forEach`
+* `Array.prototype.indexOf`
+* `Array.prototype.map`
+* `Date.now`
+* `Function.prototype.bind`
+* `Object.keys`
+* `String.prototype.split`
+* `String.prototype.trim`
+
+`es5-sham.js`, also from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim), provides the following that React needs:
+
+* `Object.create`
+* `Object.freeze`
+
+The unminified build of React needs the following from [paulmillr's console-polyfill](https://github.com/paulmillr/console-polyfill).
+
+* `console.*`
+
+When using HTML5 elements in IE8 including `<section>`, `<article>`, `<nav>`, `<header>`, and `<footer>`, it's also necessary to include [html5shiv](https://github.com/aFarkas/html5shiv) or a similar script.
+
+
+### Cross-browser Issues
+
+Although React is pretty good at abstracting browser differences, some browsers are limited or present quirky behaviors that we couldn't find a workaround for.
+
+
+#### onScroll event on IE8
+
+On IE8 the `onScroll` event doesn't bubble and IE8 doesn't have an API to define handlers to the capturing phase of an event, meaning there is no way for React to listen to these events.
+Currently a handler to this event is ignored on IE8.
+
+See the [onScroll doesn't work in IE8](https://github.com/facebook/react/issues/631) GitHub issue for more information.
+ve carried over this philosophy of using forward thinking JS.
 
 In addition to that philosophy, we've also taken the stance that we, as authors of a JS library, should not be shipping polyfills as a part of our library. If every library did this, there's a good chance you'd be sending down the same polyfill multiple times, which could be a sizable chunk of dead code. If your product needs to support older browsers, chances are you're already using something like [es5-shim](https://github.com/kriskowal/es5-shim).
 
