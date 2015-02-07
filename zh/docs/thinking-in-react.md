@@ -54,7 +54,7 @@ JSON接口返回数据如下：
   4. **`ProductCategoryRow` （青色）：** 为每个 *分类(category)* 展示一列表头
   5. **`ProductRow` （红色）：** 为每个 *产品(product)* 展示一列
 
-如果你仔细观察 `ProductTable`，你会发现表头（包含"Name"和"Price"标签 2个部分）并不是单独的组件。
+如果你仔细观察 `ProductTable`，你会发现表头（包含"Name"和"Price"标签）并不是单独的组件。
 If you look at `ProductTable` you'll see that the table header (containing the "Name" and "Price" labels) isn't its own component. This is a matter of preference and there's an argument to be made either way. For this example I left it as part of `ProductTable` because it is part of rendering the *data collection* which is `ProductTable`'s responsibility. However if this header grows to be complex (i.e. if we were to add affordances for sorting) it would certainly make sense to make this its own `ProductTableHeader` component.
 
 Now that we've identified the components in our mock, let's arrange them into a hierarchy. This is easy. Components that appear within another component in the mock should appear as a child in the hierarchy:
