@@ -15,7 +15,11 @@
  - [Bundler](http://gembundler.com/)
 
 Mac OS X预装了Ruby，但是你可能需要更新RubyGems（通过`gem update --system`命令）。
-否则，[RVM](https://rvm.io/)和[rbenv](https://github.com/sstephenson/rbenv)是安装Ruby的流行方式。
+
+由于Rubygems官方网站有时候有问题，也许你需要使用[国内镜像](http://www.oschina.net/news/24321/rubygems-taobao-mirror)安装
+
+另外，[RVM](https://rvm.io/)和[rbenv](https://github.com/sstephenson/rbenv)也是安装Ruby的流行方式。
+
 一旦你拥有了RubyGems，并且安装了Bundler(通过`gem install bundler`命令)。
 
 可以访问[Jekyll](http://jekyllrb.com/)来完成Jekyll的安装
