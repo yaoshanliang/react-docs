@@ -1,34 +1,34 @@
-# React Documentation & Website
+# React文档和网站
 
-We use [Jekyll](http://jekyllrb.com/) to build the site using ([mostly](http://zpao.com/posts/adding-line-highlights-to-markdown-code-fences/)) Markdown, and we host it by pushing HTML to [GitHub Pages](http://pages.github.com/).
+我们使用[Jekyll](http://jekyllrb.com/)来构建这个网站，该网站（[绝大部分](http://zpao.com/posts/adding-line-highlights-to-markdown-code-fences/)）使用Markdown，我们通过提交HTML文件到[GitHub Pages](http://pages.github.com/)来发布该网站。
 
-## Installation
+## 安装
 
-If you are working on the site, you will want to install and run a local copy of it.
+如果你要在此网站上做修改，你将会想安装运行一个本地副本。
 
-### Dependencies
+### 依赖
 
-In order to use Jekyll, you will need to have Ruby installed.
+为了使用Jekyll，你需要安装Ruby。
 
  - [Ruby](http://www.ruby-lang.org/) (version >= 1.8.7)
  - [RubyGems](http://rubygems.org/) (version >= 1.3.7)
  - [Bundler](http://gembundler.com/)
 
-Mac OS X comes pre-installed with Ruby, but you may need to update RubyGems (via `gem update --system`).
-Otherwise, [RVM](https://rvm.io/) and [rbenv](https://github.com/sstephenson/rbenv) are popular ways to install Ruby.
-Once you have RubyGems and installed Bundler (via `gem install bundler`), use it to install the dependencies:
+Mac OS X预装了Ruby，但是你可能需要更新RubyGems（通过`gem update --system`命令）。
+否则，[RVM](https://rvm.io/)和[rbenv](https://github.com/sstephenson/rbenv)是安装Ruby的流行方式。
+一旦你拥有了RubyGems，并且安装了Bundler(通过`gem install bundler`命令)，使用它安装如下依赖：
 
 ```sh
 $ cd react/docs
-$ bundle install # Might need sudo.
-$ npm install # Might need sudo.
+$ bundle install # 可能需要sudo。
+$ npm install # 可能需要sudo。
 ```
 
-### Instructions
+### 指令
 
-The site requires React, so first make sure you've built the project (via `grunt`).
+这个网站需要React，所以第一步确保你已经构建了这个项目（通过`grunt`）。
 
-Use Jekyll to serve the website locally (by default, at `http://localhost:4000`):
+使用Jekyll来启动本地网站（默认地址是`http://localhost:4000`）：
 
 ```sh
 $ cd react/docs
@@ -37,9 +37,9 @@ $ bundle exec jekyll serve -w
 $ open http://localhost:4000/react/
 ```
 
-We use [SASS](http://sass-lang.com/) (with [Bourbon](http://bourbon.io/)) for our CSS, and we use JSX to transform some of our JS.
-If you only want to modify the HTML or Markdown, you do not have to do anything because we package pre-compiled copies of the CSS and JS.
-If you want to modify the CSS or JS, use [Rake](http://rake.rubyforge.org/) to compile them:
+我们使用[SASS](http://sass-lang.com/)（附带[Bourbon](http://bourbon.io/)）来生成CSS，使用JSX转换成我们的部分JS。
+如果你仅仅想修改HTML或者Markdown，你不需要做任何事，因为我们打包了预编译的CSS和JS副本。
+如果你想修改CSS或者JS，使用[Rake](http://rake.rubyforge.org/)来编译它们：
 
 ```sh
 $ cd react/docs
@@ -48,20 +48,20 @@ $ bundle exec rake watch # Automatically compiles as needed.
 # bundle exec rake js      Manually compile JS, only.
 ```
 
-## Afterthoughts
+## 接下来（Afterthoughts）
 
-### Updating `facebook.github.io/react`
+### 更新 `facebook.github.io/react`
 
-The easiest way to do this is to have a separate clone of this repository, checked out to the `gh-pages` branch. We have a build step that expects this to be in a directory named `react-gh-pages` at the same depth as `react`. Then it's just a matter of running `grunt docs`, which will compile the site and copy it out to this repository. From there, you can check it in.
+做这件事最简单的方式是拥有一个独立的此仓库副本，签出`gh-pages`分支。我们有一个构建步骤，这些步骤需要该分支在`react-gh-pages`目录下，并且此目录和`react`在同一目录。然后就仅仅是一个运行`grunt docs`命令的问题了，这将会编译该网站，将网站拷贝出当前仓库。在那里，你可以提交编译后的内容到服务器。
 
-**Note:** This should only be done for new releases. You should create a tag corresponding to the release tag in the main repository.
+**注意：** 应该仅仅在有新发布的时候才做这件事。你应该创建一个标签，对应于发布主仓库的发布标签。
 
-We also have a rake task that does the same thing (without creating commits). It expects the directory structure mentioned above.
+我们也有rake任务来做相同的事情（不创建提交）。该任务需要上面提到的目录结构。
 
 ```sh
 $ bundle exec rake release
 ```
 
-### Removing the Jekyll / Ruby Dependency
+### 移除Jekyll / Ruby依赖
 
-In an ideal world, we would not be adding a Ruby dependency on part of our project. We would like to move towards a point where we are using React to render the website.
+在理想的情况下，我们不会添加一个Ruby依赖作为我们项目的一部分。我们愿意使用React来渲染网站。
