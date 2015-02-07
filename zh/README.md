@@ -65,3 +65,39 @@ $ bundle exec rake release
 ### 移除Jekyll / Ruby依赖
 
 在理想的情况下，我们不会添加一个Ruby依赖作为我们项目的一部分。我们愿意使用React来渲染网站。
+
+
+
+
+# 文档目录
+
+## 快速入门
+
+* [快速开始](/docs/getting-started.md)
+* [教程](/docs/tutorial.md)
+* [深入理解React](/docs/thinking-in-react.md)
+
+## 指南
+
+* [为什么使用React](/zh/docs/01-why-react.md)
+* [数据呈现](/docs/02-displaying-data.md)
+    - [深入理解JSX](/docs/02.1-jsx-in-depth.md)
+    - [JSX的延展属性](/zh/docs/02.2-jsx-spread.md)
+    - [JSX陷阱](/docs/02.3-jsx-gotchas.md)
+* [富交互性的动态用户界面](/docs/03-interactivity-and-dynamic-uis.md)
+* [复合组件](/docs/04-multiple-components.md)
+* [可复用组件](/docs/05-reusable-components.md)
+* [传递Props](/docs/06-transferring-props.md)
+* [表单组件](/docs/07-forms.md)
+* [浏览器中的工作原理](/docs/08-working-with-the-browser.md)
+    - 关于Refs的更多内容
+* [工具集成](/docs/09-tooling-integration.md)
+* [插件](/docs/10-addons.md)
+    - [动画](/docs/10.1-animation.md)
+    - [双向绑定](/docs/10.2-form-input-binding-sugar.md)
+    - [类名操作](/docs/10.3-class-name-manipulation.md)
+    - [测试工具集](/docs/10.4-test-utils.md)
+    - [克隆组件](/docs/10.5-clone-with-props.md)
+    - [Immutability Helpers](/docs/10.6-update.md)
+    - [PureRenderMixin](/docs/10.7-pure-render-mixin.md)
+    - [性能分析工具](/docs/10.8-perf.md)
