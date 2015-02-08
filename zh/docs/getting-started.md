@@ -47,7 +47,7 @@ redirect_from: "docs/index.html"
 
 ### 分离文件
 
-你的 React JSX 代码文件可以写在单独的文件里。创建 `src/helloworld.js` 文件，内容如下： 
+你的 React JSX 代码文件可以写在单独的文件里。创建 `src/helloworld.js` 文件，内容如下：
 
 ```javascript
 React.render(
@@ -95,7 +95,7 @@ React.render(
   <head>
     <title>Hello React!</title>
     <script src="build/react.js"></script>
-    <!-- No need for JSXTransformer! -->
+    <!-- 不需要JSXTransformer! -->
   </head>
   <body>
     <div id="example"></div>
@@ -104,9 +104,9 @@ React.render(
 </html>
 ```
 
-## 想要遵循 CommonJS?
+## 想要遵循 CommonJS 规范?
 
-如果你想在使用 React 时，遵循 [browserify](http://browserify.org/)，[webpack](http://webpack.github.io/) 或者或其它兼容CommonJS的模块系统，只要使用 [`react` npm package](https://www.npmjs.org/package/react) 即可。而且，`jsx` 转换工具可以很轻松的地集成到大部分打包系统里（不仅仅是 CommonJS）。
+如果你想在使用 React 时，遵循 [browserify](http://browserify.org/)，[webpack](http://webpack.github.io/) 或者或其它兼容CommonJS的模块系统，只要使用 [`react` npm包](https://www.npmjs.org/package/react) 即可。而且，`jsx` 转换工具可以很轻松的地集成到大部分打包系统里（不仅仅是 CommonJS）。
 
 ## 下一步
 

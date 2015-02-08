@@ -101,17 +101,17 @@ _挂载的_复合组件也支持如下方法：
 * `forceUpdate()`当你知道一些很深的组件state已经改变了的时候，可以在该组件上面调用，而不是使用`this.setState()`。
 
 
-## 浏览器支持和缺陷填充（Browser Support and Polyfills）
+## 跨浏览器支持和兼容代码（Browser Support and Polyfills）
 
-在Facebook，我们支持老得浏览器，包括IE8。我们已经有写好的缺陷填充代码很长时间了，这能让我们写有远见的JS。这意味着我们没有零散的骇客代码充斥在我们的代码库里面，并且我们依然能够预计我们的代码“正常工作起来”。例如，不使用`+new Date()`，我们能够写`Date.now()`。
+在Facebook，我们支持低版本的浏览器，包括IE8。我们已经写好兼容代码很长时间了，这能让我们写有远见的JS。这意味着我们没有零散的骇客代码充斥在我们的代码库里面，并且我们依然能够预计我们的代码“正常工作起来”。例如，不使用`+new Date()`，我们能够写`Date.now()`。
 At Facebook, we support older browsers, including IE8. We've had polyfills in place for a long time to allow us to write forward-thinking JS. This means we don't have a bunch of hacks scattered throughout our codebase and we can still expect our code to "just work". For example, instead of seeing `+new Date()`, we can just write `Date.now()`. Since the open source React is the same as what we use internally, we've carried over this philosophy of using forward thinking JS.
 
 In addition to that philosophy, we've also taken the stance that we, as authors of a JS library, should not be shipping polyfills as a part of our library. If every library did this, there's a good chance you'd be sending down the same polyfill multiple times, which could be a sizable chunk of dead code. If your product needs to support older browsers, chances are you're already using something like [es5-shim](https://github.com/kriskowal/es5-shim).
 
 
-### Polyfills Needed to Support Older Browsers
+### 支持低版本浏览器的兼容代码
 
-`es5-shim.js` from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim) provides the following that React needs:
+[kriskowal的es5-shim](https://github.com/kriskowal/es5-shim) `es5-shim.js` 提供了以下react需要的api：
 
 * `Array.isArray`
 * `Array.prototype.every`
@@ -124,7 +124,7 @@ In addition to that philosophy, we've also taken the stance that we, as authors 
 * `String.prototype.split`
 * `String.prototype.trim`
 
-`es5-sham.js`, also from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim), provides the following that React needs:
+[kriskowal的es5-shim](https://github.com/kriskowal/es5-shim) `es5-sham.js` 同样提供了以下react需要的api：
 
 * `Object.create`
 * `Object.freeze`
