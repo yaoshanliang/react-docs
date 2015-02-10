@@ -58,7 +58,7 @@ $ open http://localhost:4000/react/
 * [传递Props](/zh/docs/06-transferring-props.md)
 * [表单组件](/zh/docs/07-forms.md)
 * [浏览器中的工作原理](/zh/docs/08-working-with-the-browser.md)
-    - [关于Refs的更多内容](/zh/docs/08-more-about-refs.md)
+    - [关于Refs的更多内容](/zh/docs/08.1-more-about-refs.md)
 * [工具集成](/zh/docs/09-tooling-integration.md)
 * [插件](/zh/docs/10-addons.md)
     - [动画](/zh/docs/10.1-animation.md)
