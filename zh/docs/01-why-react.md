@@ -24,7 +24,7 @@ React 都是关于构建可复用的组件。事实上，通过 React 你唯一�
 
 ## 给它5分钟的时间
 
-React挑战了很多传统的知识，第一眼看上去可能很多想法有点疯狂。当你阅读这篇指南，请[给它5分钟的时间](http://37signals.com/svn/posts/3124-give-it-five-minutes)；那些疯狂的想法已经帮助 Facebook 和 Instagram 从里到外创建了上千的组件了。
+React 挑战了很多传统的知识，第一眼看上去可能很多想法有点疯狂。当你阅读这篇指南，请[给它5分钟的时间](http://37signals.com/svn/posts/3124-give-it-five-minutes)；那些疯狂的想法已经帮助 Facebook 和 Instagram 从里到外创建了上千的组件了。
 
 ## 了解更多
 
