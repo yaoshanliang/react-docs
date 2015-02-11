@@ -72,8 +72,8 @@ $ open http://localhost:4000/react/
 
 ## 参考
 
-* [顶层 API](/zh/docs/10.8-top-level-api.md)
-* [组件 API](/zh/docs/10.8-component-api.md)
+* [顶层 API](/zh/docs/ref-01-top-level-api.md)
+* [组件 API](/zh/docs/ref-02-component-api.md)
 
 ## Flux
 
