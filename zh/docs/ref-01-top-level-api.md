@@ -1,6 +1,6 @@
 ---
 id: top-level-api
-title: Top-Level API
+title: 顶层API
 permalink: top-level-api.html
 next: component-api.html
 redirect_from: "/docs/reference.html"
@@ -8,7 +8,7 @@ redirect_from: "/docs/reference.html"
 
 ## React
 
-`React` is the entry point to the React library. If you're using one of the prebuilt packages it's available as a global; if you're using CommonJS modules you can `require()` it.
+`React` 是 React 库的入口。如果使用的是预编译包，则 `React` 是全局的；如果使用 CommonJS 模块系统，则可以用 `require()` 函数引入 React。
 
 
 ### React.createClass
@@ -17,9 +17,9 @@ redirect_from: "/docs/reference.html"
 ReactClass createClass(object specification)
 ```
 
-Create a component class, given a specification. A component implements a `render` method which returns **one single** child. That child may have an arbitrarily deep child structure. One thing that makes components different than standard prototypal classes is that you don't need to call new on them. They are convenience wrappers that construct backing instances (via new) for you.
+创建一个组件类，并作出定义。组件实现了 `render()` 方法，该方法返回**一个**子级。该子级可能包含很深的子级结构。组件与标准原型类的不同之处在于，你不需要使用 new 来实例化。 组件是一种很方便的封装，可以（通过 new ）为你创建后台实例。
 
-For more information about the specification object, see [Component Specs and Lifecycle](/react/docs/component-specs.html).
+更多关于定义组件对象的信息，参考[组件定义和生命周期](/react/docs/component-specs.html)。
 
 
 ### React.createElement
@@ -32,8 +32,7 @@ ReactElement createElement(
 )
 ```
 
-Create and return a new `ReactElement` of the given type. The type argument can be either an
-html tag name string (eg. 'div', 'span', etc), or a `ReactClass` (created via `React.createClass`).
+创建并返回一个新的指定类型的 `ReactElement`。type 参数可以是一个 html 标签名字字符串（例如，“div”，“span”，等等），或者是 `ReactClass` （通过 `React.createClass` 创建的）。
 
 
 ### React.createFactory
@@ -44,9 +43,7 @@ factoryFunction createFactory(
 )
 ```
 
-Return a function that produces ReactElements of a given type. Like `React.createElement`,
-the type argument can be either an html tag name string (eg. 'div', 'span', etc), or a
-`ReactClass`.
+返回一个生成指定类型 ReactElements 的函数。比如 `React.createElement`，type 参数可以是一个 html 标签名字字符串（例如，“div”，“span”，等等），或者是 `ReactClass`。
 
 
 ### React.render
@@ -59,17 +56,15 @@ ReactComponent render(
 )
 ```
 
-Render a ReactElement into the DOM in the supplied `container` and return a reference to the component.
+渲染一个 ReactElement 到 DOM 中，放在 `container` 指定的 DOM 元素下，返回一个到该组件的引用。
 
-If the ReactElement was previously rendered into `container`, this will perform an update on it and only mutate the DOM as necessary to reflect the latest React component.
+如果 ReactElement 之前就被渲染到了 `container` 中，该函数将会更新此 ReactElement，仅改变需要改变的 DOM 节点以展示最新的 React 组件。
 
-If the optional callback is provided, it will be executed after the component is rendered or updated.
+如果提供了可选的回调函数，则该函数将会在组件渲染或者更新之后调用。
 
-> Note:
+> 注意：
 >
-> `React.render()` replaces the contents of the container node you
-> pass in. In the future, it may be possible to insert a component to an
-> existing DOM node without overwriting the existing children.
+> `React.render()` 替换传入的容器节点内容。在将来，或许可能插入组件到已存在的 DOM 节点中，但不覆盖已有的子节点。
 
 
 ### React.unmountComponentAtNode
@@ -78,7 +73,7 @@ If the optional callback is provided, it will be executed after the component is
 boolean unmountComponentAtNode(DOMElement container)
 ```
 
-Remove a mounted React component from the DOM and clean up its event handlers and state. If no component was mounted in the container, calling this function does nothing. Returns `true` if a component was unmounted and `false` if there was no component to unmount.
+从 DOM 中移除已经挂载的 React 组件，清除相应的事件处理器和 state。如果在 container 内没有组件挂载，这个函数将什么都不做。如果组件成功移除，则返回 `true`；如果没有组件被移除，则返回 `false`。
 
 
 ### React.renderToString
@@ -87,9 +82,9 @@ Remove a mounted React component from the DOM and clean up its event handlers an
 string renderToString(ReactElement element)
 ```
 
-Render a ReactElement to its initial HTML. This should only be used on the server. React will return an HTML string. You can use this method to generate HTML on the server and send the markup down on the initial request for faster page loads and to allow search engines to crawl your pages for SEO purposes.
+把组件渲染成原始的 HTML 字符串。该方法应该仅在服务器端使用。React 将会返回一个 HTML 字符串。你可以在服务器端用此方法生成 HTML，然后将这些标记发送给客户端，这样可以获得更快的页面加载速度，并且有利于搜索引擎抓取页面，方便做 SEO。
 
-If you call `React.render()` on a node that already has this server-rendered markup, React will preserve it and only attach event handlers, allowing you to have a very performant first-load experience.
+如果在一个节点上面调用 `React.render()`，并且该节点已经有了服务器渲染的标记，React 将会维护该节点，并且仅绑定事件处理器，保证有一个高效的首屏加载体验。
 
 
 ### React.renderToStaticMarkup
@@ -98,7 +93,7 @@ If you call `React.render()` on a node that already has this server-rendered mar
 string renderToStaticMarkup(ReactElement element)
 ```
 
-Similar to `renderToString`, except this doesn't create extra DOM attributes such as `data-react-id`, that React uses internally. This is useful if you want to use React as a simple static page generator, as stripping away the extra attributes can save lots of bytes.
+和 `renderToString` 类似，除了不创建额外的 DOM 属性，例如 `data-react-id`，因为这些属性仅在 React 内部使用。如果你想用 React 做一个简单的静态页面生成器，这是很有用的，因为丢掉额外的属性能够节省很多字节。
 
 
 ### React.isValidElement
@@ -107,17 +102,17 @@ Similar to `renderToString`, except this doesn't create extra DOM attributes suc
 boolean isValidElement(* object)
 ```
 
-Verifies the object is a ReactElement.
+判断对象是否是一个 ReactElement。
 
 
 ### React.DOM
 
-`React.DOM` provides convenience wrappers around `React.createElement` for DOM components. These should only be used when not using JSX. For example, `React.DOM.div(null, 'Hello World!')`
+`React.DOM` 运用 `React.createElement` 为 DOM 组件提供了方便的包装。该方式仅在未使用 JSX 的时候适用。例如，`React.DOM.div(null, 'Hello World!')`。
 
 
 ### React.PropTypes
 
-`React.PropTypes` includes types that can be used with a component's `propTypes` object to validate props being passed to your components. For more information about `propTypes`, see [Reusable Components](/react/docs/reusable-components.html).
+`React.PropTypes` 包含了能与组件 `propTypes` 对象共用的类型，用于验证传入组件的 props。更多有关 `propTypes` 的信息，参考[复用组件](/react/docs/reusable-components.html)。
 
 
 ### React.initializeTouchEvents
@@ -126,12 +121,12 @@ Verifies the object is a ReactElement.
 initializeTouchEvents(boolean shouldUseTouch)
 ```
 
-Configure React's event system to handle touch events on mobile devices.
+配置 React 的事件系统，使 React 能处理移动设备的触摸（ touch ）事件。
 
 
 ### React.Children
 
-`React.Children` provides utilities for dealing with the `this.props.children` opaque data structure.
+`React.Children` 为处理 `this.props.children` 这个封闭的数据结构提供了有用的工具。
 
 #### React.Children.map
 
@@ -139,7 +134,7 @@ Configure React's event system to handle touch events on mobile devices.
 object React.Children.map(object children, function fn [, object context])
 ```
 
-Invoke `fn` on every immediate child contained within `children` with `this` set to `context`. If `children` is a nested object or array it will be traversed: `fn` will never be passed the container objects. If children is `null` or `undefined` returns `null` or `undefined` rather than an empty object.
+在每一个直接子级（包含在 `children` 参数中的）上调用 `fn` 函数，此函数中的 `this` 指向 `上下文`。如果 `children` 是一个内嵌的对象或者数组，它将被遍历：不会传入容器对象到 `fn` 中。如果 children 参数是 `null` 或者 `undefined`，那么返回 `null` 或者 `undefined` 而不是一个空对象。
 
 #### React.Children.forEach
 
@@ -147,7 +142,7 @@ Invoke `fn` on every immediate child contained within `children` with `this` set
 React.Children.forEach(object children, function fn [, object context])
 ```
 
-Like `React.Children.map()` but does not return an object.
+类似于 `React.Children.map()`，但是不返回对象。
 
 #### React.Children.count
 
@@ -155,7 +150,7 @@ Like `React.Children.map()` but does not return an object.
 number React.Children.count(object children)
 ```
 
-Return the total number of components in `children`, equal to the number of times that a callback passed to `map` or `forEach` would be invoked.
+返回 `children` 当中的组件总数，和传递给 `map` 或者 `forEach` 的回调函数的调用次数一致。
 
 #### React.Children.only
 
@@ -163,4 +158,4 @@ Return the total number of components in `children`, equal to the number of time
 object React.Children.only(object children)
 ```
 
-Return the only child in `children`. Throws otherwise.
+返回 `children` 中仅有的子级。否则抛出异常。
