@@ -84,7 +84,7 @@ setProps(object nextProps[, function callback])
 >
 > When possible, the declarative approach of calling `React.render()` again is preferred; it tends to make updates easier to reason about. (There's no significant performance difference between the two approaches.)
 >
-> This method can only be called on a root-level component. That is, it's only available on the component passed directly to `React.render()` and none of its children. If you're inclined to use `setProps()` on a child component, instead take advantage of reactive updates and pass the new prop to the child component when it's created in `render()`.
+> 刚方法仅在根组件上面调用。也就是说，仅在直接传给 `React.render()` 的组件上可用，在它的子级组件上不可用。如果你倾向于在子组件上使用 `setProps()`，不要利用响应式更新，而是当子组件在 `render()` 中创建的时候传入新的 prop 到子组件中。
 
 
 ### replaceProps
