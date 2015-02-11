@@ -66,7 +66,7 @@
 - title: 参考
   items:
   - id: top-level-api
-    title: Top-Level API
+    title: 顶层 API
   - id: component-api
     title: Component API
   - id: component-specs
