@@ -69,6 +69,7 @@ $ open http://localhost:4000/react/
     - [Immutability Helpers](/zh/docs/10.6-update.md)
     - [PureRenderMixin](/zh/docs/10.7-pure-render-mixin.md)
     - [性能分析工具](/zh/docs/10.8-perf.md)
+* [Flux](/zh/docs/flux-overview.md)
 
 # 翻译规范
 
