@@ -68,7 +68,7 @@
   - id: top-level-api
     title: 顶层 API
   - id: component-api
-    title: Component API
+    title: 组件 API
   - id: component-specs
     title: Component Specs and Lifecycle
   - id: tags-and-attributes
