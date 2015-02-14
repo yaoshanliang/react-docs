@@ -78,7 +78,7 @@
   - id: dom-differences
     title: 与 DOM 的差异
   - id: special-non-dom-attributes
-    title: Special Non-DOM Attributes
+    title: 特殊的非 DOM 属性
   - id: reconciliation
     title: Reconciliation
 - title: Flux
