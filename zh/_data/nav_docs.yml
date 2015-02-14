@@ -70,7 +70,7 @@
   - id: component-api
     title: 组件 API
   - id: component-specs
-    title: Component Specs and Lifecycle
+    title: 组件的详细说明和生命周期（Component Specs and Lifecycle）
   - id: tags-and-attributes
     title: 标签和属性支持
   - id: events

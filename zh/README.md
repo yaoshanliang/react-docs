@@ -75,6 +75,7 @@ $ open http://localhost:4000/react/
 * [顶层 API](/zh/docs/ref-01-top-level-api.md)
 * [组件 API](/zh/docs/ref-02-component-api.md)
 * [组件的详细说明和生命周期](/zh/docs/ref-03-component-specs.md)
+* [标签和属性支持](/zh/docs/ref-04-tags-and-attributes.md)
 
 ## Flux
 
