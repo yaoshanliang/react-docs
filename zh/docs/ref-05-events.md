@@ -1,16 +1,16 @@
 ---
 id: events
-title: Event System
+title: 事件系统
 permalink: events.html
 prev: tags-and-attributes.html
 next: dom-differences.html
 ---
 
-## SyntheticEvent
+## 虚拟事件对象
 
-Your event handlers will be passed instances of `SyntheticEvent`, a cross-browser wrapper around the browser's native event. It has the same interface as the browser's native event, including `stopPropagation()` and `preventDefault()`, except the events work identically across all browsers.
+事件处理器将会传入`虚拟事件对象`的实例，一个对浏览器本地事件的跨浏览器封装。它有和浏览器本地事件相同的属性和方法，包括 `stopPropagation()` 和 `preventDefault()`，但是没有浏览器兼容问题。
 
-If you find that you need the underlying browser event for some reason, simply use the `nativeEvent` attribute to get it. Every `SyntheticEvent` object has the following attributes:
+如果因为一些因素，需要底层的浏览器事件对象，只要使用 `nativeEvent` 属性就可以获取到它了。每一个`虚拟事件对象`都有下列的属性：
 
 ```javascript
 boolean bubbles
@@ -27,43 +27,42 @@ number timeStamp
 string type
 ```
 
-> Note:
+> 注意：
 >
-> As of v0.12, returning `false` from an event handler will no longer stop event propagation. Instead, `e.stopPropagation()` or `e.preventDefault()` should be triggered manually, as appropriate.
+> 对于 v0.12，在事件处理函数中返回 `false` 将不会阻止事件冒泡。取而代之的是在合适的应用场景下，手动调用 `e.stopPropagation()` 或者 `e.preventDefault()`。
 
 
-## Supported Events
+## 支持的事件
 
-React normalizes events so that they have consistent properties across
-different browsers. 
+React 标准化了事件对象，因此在不同的浏览器中都会有相同的属性。
 
-The event handlers below are triggered by an event in the bubbling phase. To register an event handler for the capture phase, append `Capture` to the event name; for example, instead of using `onClick`, you would use `onClickCapture` to handle the click event in the capture phase.
+如下的事件处理器在事件冒泡阶段触发。要在捕获阶段触发某个事件处理器，在事件名字后面追加 `Capture` 字符串；例如，使用 `onClickCapture` 而不是 `onClick` 来在捕获阶段处理点击事件。
 
 
-### Clipboard Events
+### 剪贴板事件
 
-Event names:
+事件名：
 
 ```
 onCopy onCut onPaste
 ```
 
-Properties:
+属性：
 
 ```javascript
 DOMDataTransfer clipboardData
 ```
 
 
-### Keyboard Events
+### 键盘事件：
 
-Event names:
+时间名字：
 
 ```
 onKeyDown onKeyPress onKeyUp
 ```
 
-Properties:
+属性：
 
 ```javascript
 boolean altKey
@@ -81,35 +80,35 @@ Number which
 ```
 
 
-### Focus Events
+### 焦点事件
 
-Event names:
+事件名：
 
 ```
 onFocus onBlur
 ```
 
-Properties:
+属性：
 
 ```javascript
 DOMEventTarget relatedTarget
 ```
 
 
-### Form Events
+### 表单事件
 
-Event names:
+事件名：
 
 ```
 onChange onInput onSubmit
 ```
 
-For more information about the onChange event, see [Forms](/react/docs/forms.html).
+更多关于 onChange 事件的信息，参考[表单](/react/docs/forms.html)。
 
 
-### Mouse Events
+### 鼠标事件
 
-Event names:
+事件名：
 
 ```
 onClick onDoubleClick onDrag onDragEnd onDragEnter onDragExit onDragLeave
@@ -117,7 +116,7 @@ onDragOver onDragStart onDrop onMouseDown onMouseEnter onMouseLeave
 onMouseMove onMouseOut onMouseOver onMouseUp
 ```
 
-Properties:
+属性：
 
 ```javascript
 boolean altKey
@@ -137,18 +136,17 @@ boolean shiftKey
 ```
 
 
-### Touch events
+### 触摸事件
 
-To enable touch events, call `React.initializeTouchEvents(true)` before
-rendering any component.
+为了使触摸事件生效，在渲染所有组件之前调用 `React.initializeTouchEvents(true)`。
 
-Event names:
+事件名：
 
 ```
 onTouchCancel onTouchEnd onTouchMove onTouchStart
 ```
 
-Properties:
+属性：
 
 ```javascript
 boolean altKey
@@ -162,15 +160,15 @@ DOMTouchList touches
 ```
 
 
-### UI Events
+### UI 事件
 
-Event names:
+事件名：
 
 ```
 onScroll
 ```
 
-Properties:
+属性：
 
 ```javascript
 Number detail
@@ -178,15 +176,15 @@ DOMAbstractView view
 ```
 
 
-### Wheel Events
+### 鼠标滚轮滚动事件
 
-Event names:
+事件名：
 
 ```
 onWheel
 ```
 
-Properties:
+属性：
 
 ```javascript
 Number deltaMode
