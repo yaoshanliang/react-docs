@@ -76,7 +76,7 @@
   - id: events
     title: 事件系统
   - id: dom-differences
-    title: DOM Differences
+    title: 与 DOM 的差异
   - id: special-non-dom-attributes
     title: Special Non-DOM Attributes
   - id: reconciliation

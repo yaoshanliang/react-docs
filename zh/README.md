@@ -77,6 +77,7 @@ $ open http://localhost:4000/react/
 * [组件的详细说明和生命周期](/zh/docs/ref-03-component-specs.md)
 * [标签和属性支持](/zh/docs/ref-04-tags-and-attributes.md)
 * [事件系统](/zh/docs/ref-05-events.md)
+* [与 DOM 的差异](/zh/docs/ref-06-dom-differences.md)
 
 ## Flux
 
