@@ -95,8 +95,7 @@ renderB: <div><span>first</span><span>second</span></div>
 => [insertNode <span>second</span>]
 ```
 
-在开始处插入元素是比较困难的。React 将会发现，两个节点都是 span，因此直接修改第一个 span 元素，然后插入一个新的 span 元素：
-（Inserting an element at the beginning is problematic. React is going to see that both nodes are spans and therefore run into a mutation mode.）
+在开始处插入元素比较麻烦。React 发现两个节点都是 span，因此直接修改已有 span 的文本内容，然后在后面插入一个新的 span 节点。
 
 ```xml
 renderA: <div><span>first</span></div>
@@ -104,13 +103,11 @@ renderB: <div><span>second</span><span>first</span></div>
 => [replaceAttribute textContent 'second'], [insertNode <span>first</span>]
 ```
 
-有很多的算法尝试找出转换一组元素的最小操作集合。[Levenshtein 距离](http://en.wikipedia.org/wiki/Levenshtein_distance)能够使用单一元素插入、删除和替换在 O(n<sup>2</sup>) 的复杂度下找到最小操作集合。即使使用 Levenshtein，当一个节点移到了另外一个位置，Levenshtein 不会发现，并且算法做这件事有很糟糕的复杂度。
-（There are many algorithms that attempt to find the minimum sets of operations to transform a list of elements. [Levenshtein distance](http://en.wikipedia.org/wiki/Levenshtein_distance) can find the minimum using single element insertion, deletion and substitution in O(n<sup>2</sup>). Even if we were to use Levenshtein, this doesn't find when a node has moved into another position and algorithms to do that have much worse complexity.）
+有很多的算法尝试找出变换一组元素的最小操作集合。[Levenshtein distance](http://en.wikipedia.org/wiki/Levenshtein_distance)算法能够找出这个最小的操作集合，使用单一元素插入、删除和替换，复杂度为 O(n<sup>2</sup>) 。即使使用 Levenshtein 算法，不会检测出一个节点已经移到了另外一个位置去了，要实现这个检测算法，会引入更加糟糕的复杂度。
 
 ### 键（Keys）
 
-为了解决这个表面上很棘手的问题，一个可选的 HTML 属性被引入了。可以给每个子级一个键值，用于将来的匹配比较。如果指定了一个键值，React 就能够知道节点插入、节点删除和节点替换，并且使用哈希表使节点移动复杂度为 O(n)。
-（In order to solve this seemingly intractable issue, an optional attribute has been introduced. You can provide for each child a key that is going to be used to do the matching. If you specify a key, React is now able to find insertion, deletion, substitution and moves in O(n) using a hash table.）
+为了解决这个看起来很棘手的问题，引入了一个可选的属性。可以给每个子级一个键值，用于将来的匹配比较。如果指定了一个键值，React 就能够检测出节点插入、移除和替换，并且借助哈希表使节点移动复杂度为 O(n)。
 
 
 ```xml
@@ -119,24 +116,18 @@ renderB: <div><span key="second">second</span><span key="first">first</span></di
 => [insertNode <span>second</span>]
 ```
 
-实际上，找到一个键值不是很困难。大多数时候，要展示的元素已经有一个唯一的标识了。当没有唯一标识的时候，可以给组件添加一个新的 ID 属性，或者计算内容的哈希值，然后生成一个键值。记住，键值仅需要在兄弟节点中唯一，而不是全局唯一。
-（In practice, finding a key is not really hard. Most of the time, the element you are going to display already has a unique id. When that's not the case, you can add a new ID property to your model or hash some parts of the content to generate a key. Remember that the key only has to be unique among its siblings, not globally unique.）
+在实际开发中，生成一个键值不是很困难。大多数时候，要展示的元素已经有一个唯一的标识了。当没有唯一标识的时候，可以给组件模型添加一个新的 ID 属性，或者计算部分内容的哈希值来生成一个键值。记住，键值仅需要在兄弟节点中唯一，而不是全局唯一。
 
 
-## Trade-offs
+## 权衡（Trade-offs）
 
-记住同步更新算法是一种实现细节是很重要的。React 能够在每次操作中重新渲染整个应用；结果将会是一样的。我们经常优化这个预判算法来使常规的使用场景更加快速。
-（It is important to remember that the reconciliation algorithm is an implementation detail. React could re-render the whole app on every action; the end result would be the same. We are regularly refining the heuristics in order to make common use cases faster.）
+同步更新算法只是一种实现细节，记住这点很重要。React 能在每次操作中重新渲染整个应用，最终的结果将会是一样的。我们定期优化这个启发式算法来使常规的应用场景更加快速。
 
-在当前的实现中，你能够知道某个子级树已经从它的兄弟节点中移除，但是你不能辨别出它是否移到了其它某个地方。该算法将会重新渲染整个子树。
-（In the current implementation, you can express the fact that a sub-tree has been moved amongst its siblings, but you cannot tell that it has moved somewhere else. The algorithm will re-render that full sub-tree.）
+在当前的实现中，能够检测到某个子级树已经从它的兄弟节点中移除，但是不能指出它是否已经移到了其它某个地方。当前算法将会重新渲染整个子树。
 
-由于依赖于两个启发，如果在它们之后的假设条件没有满足，性能将会大打折扣。
-（Because we rely on two heuristics, if the assumptions behind them are not met, performance will suffer.）
+由于依赖于两个预判条件，如果这两个条件都没有满足，性能将会大打折扣。
 
-1、算法将不会尝试匹配不同组件类的子树。如果发现交换两个输出非常相似的两个组件类，你可能想使它们变成同一个组件类。在实际操作中，这不是一个问题。
-（1. The algorithm will not try to match sub-trees of different components classes. If you see yourself alternating between two components classes with very similar output, you may want to make it the same class. In practice, we haven't found this to be an issue.）
+1、算法将不会尝试匹配不同组件类的子树。如果发现正在使用的两个组件类输出的 DOM 结构非常相似，你或许想把这两个组件类改成一个组件类。实际上， 这不是个问题。
 
-2、如果没有提供稳定的键值（例如通过 Math.random() 生成），所有子树将会在每次数据更新中被重新渲染。通过给用户选择键值的机会，他们能够给特定场景写出更优化的代码。
-（2. If you don't provide stable keys (by using Math.random() for example), all the sub-trees are going to be re-rendered every single time. By giving the users the choice to choose the key, they have the ability to shoot themselves in the foot.）
+2、如果没有提供稳定的键值（例如通过 Math.random() 生成），所有子树将会在每次数据更新中重新渲染。通过给开发者设置键值的机会，能够给特定场景写出更优化的代码。
 
