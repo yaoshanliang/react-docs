@@ -81,6 +81,8 @@
     title: 特殊的非 DOM 属性
   - id: reconciliation
     title: Reconciliation
+  - id: glossary
+    title: React （虚拟）DOM 术语
 - title: Flux
   items:
   - id: flux-overview

@@ -1,33 +1,33 @@
 ---
 id: glossary
-title: React (Virtual) DOM Terminology
+title: React （虚拟）DOM 术语
 permalink: glossary.html
 prev: reconciliation.html
 ---
 
-In React's terminology, there are five core types that are important to distinguish:
+在 React 的术语中，有五个核心类型，区分它们是很重要的：
 
-- [ReactElement / ReactElement Factory](#react-elements)
+- [ReactElement / ReactElement 工厂](#react-elements)
 - [ReactNode](#react-nodes)
-- [ReactComponent / ReactComponent Class](#react-components)
+- [ReactComponent / ReactComponent 类](#react-components)
 
-## React Elements
+## React 元素
 
-The primary type in React is the `ReactElement`. It has four properties: `type`, `props`, `key` and `ref`. It has no methods and nothing on the prototype.
+React 中最主要的类型就是 `ReactElement`。它有四个属性：`type`，`props`，`key` 和 `ref`。它没有方法，并且原型上什么都没有。
 
-You can create one of these object through `React.createElement`.
+可以通过 `React.createElement` 创建该类型的一个实例。
 
 ```javascript
 var root = React.createElement('div');
 ```
 
-To render a new tree into the DOM, you create `ReactElement`s and pass them to `React.render` along with a regular DOM `Element` (`HTMLElement` or `SVGElement`). `ReactElement`s are not to be confused with DOM `Element`s. A `ReactElement` is a light, stateless, immutable, virtual representation of a DOM `Element`. It is a virtual DOM.
+为了渲染一个新的树形结构到 DOM 中，你创建若干个 `ReactElement`，然后传给 `React.render` 作为第一个参数，同时将第二个参数设为一个正规的 DOM `元素` （`HTMLElement` 或者 `SVGElement`）。不要混淆 `ReactElement` 实例和 DOM `元素` 实例。一个 `ReactElement` 实例是一个轻量的，无状态的，不可变的，虚拟的 DOM `元素` 的表示。是一个虚拟 DOM。
 
 ```javascript
 React.render(root, document.body);
 ```
 
-To add properties to a DOM element, pass a properties object as the second argument and children to the third argument.
+要添加属性到 DOM 元素，把属性对象作为第二个参数传入 `React.render`，把子级作为第三个参数传给 `React.render`。
 
 ```javascript
 var child = React.createElement('li', null, 'Text Content');
@@ -35,7 +35,7 @@ var root = React.createElement('ul', { className: 'my-list' }, child);
 React.render(root, document.body);
 ```
 
-If you use React JSX, then these `ReactElement`s are created for you. So this is equivalent:
+如果使用 React JSX 语法，这些 `ReactElement` 实例自动创建。所以，如下代码是等价的：
 
 ```javascript
 var root = <ul className="my-list">
@@ -44,9 +44,9 @@ var root = <ul className="my-list">
 React.render(root, document.body);
 ```
 
-__Factories__
+__工厂__
 
-A `ReactElement`-factory is simply a function that generates a `ReactElement` with a particular `type` property. React has a built-in helper for you to create factories. It's effectively just:
+一个 `ReactElement` 工厂就是一个简单的函数，该函数生成一个带有特殊 `type` 属性的 `ReactElement`。React 有一个内置的辅助方法用于创建工厂函数。事实上该方法就是这样的：
 
 ```javascript
 function createFactory(type){
@@ -54,7 +54,7 @@ function createFactory(type){
 }
 ```
 
-It allows you to create a convenient short-hand instead of typing out `React.createElement('div')` all the time.
+该函数能创建一个方便的短函数，而不是总调用 `React.createElement('div')`。
 
 ```javascript
 var div = React.createFactory('div');
@@ -62,7 +62,7 @@ var root = div({ className: 'my-div' });
 React.render(root, document.body);
 ```
 
-React already has built-in factories for common HTML tags:
+React 已经内置了常用 HTML 标签的工厂函数：
 
 ```javascript
 var root = React.DOM.ul({ className: 'my-list' },
@@ -70,25 +70,27 @@ var root = React.DOM.ul({ className: 'my-list' },
            );
 ```
 
-If you are using JSX you have no need for factories. JSX already provides a convenient short-hand for creating `ReactElement`s.
+如果使用 JSX 语法，就不需要工厂函数了。JSX 已经提供了一种方便的短函数来创建 `ReactElement` 实例。
 
 
-## React Nodes
+## React 节点
 
-A `ReactNode` can be either:
+一个 `ReactNode` 可以是：
+
 - `ReactElement`
-- `string` (aka `ReactText`)
-- `number` (aka `ReactText`)
-- Array of `ReactNode`s (aka `ReactFragment`)
+- `string` （又名 `ReactText`）
+- `number` （又名 `ReactText`）
+- `ReactNode` 实例数组 （又名 `ReactFragment`）
 
-These are used as properties of other `ReactElement`s to represent children. Effectively they create a tree of `ReactElement`s.
+这些被用作其它 `ReactElement` 实例的属性，用于表示子级。实际上它们创建了一个 `ReactElement` 实例树。
+（These are used as properties of other `ReactElement`s to represent children. Effectively they create a tree of `ReactElement`s.）
 
 
-## React Components
+## React 组件
 
-You can use React using only `ReactElement`s but to really take advantage of React, you'll want to use `ReactComponent`s to create encapsulations with embedded state.
+在使用 React 开发中，可以仅使用 `ReactElement` 实例，但是，要充分利用 React，就要使用 `ReactComponent` 来封装状态化的组件。
 
-A `ReactComponent` Class is simply just a JavaScript class (or "constructor function").
+一个 `ReactComponent` 类就是一个简单的 JavaScript 类（或者说是“构造函数”）。
 
 ```javascript
 var MyComponent = React.createClass({
@@ -98,33 +100,33 @@ var MyComponent = React.createClass({
 });
 ```
 
-When this constructor is invoked it is expected to return an object with at least a `render` method on it. This object is referred to as a `ReactComponent`.
+当该构造函数调用的时候，应该会返回一个对象，该对象至少带有一个 `render` 方法。该对象指向一个 `ReactComponent` 实例。
 
 ```javascript
 var component = new MyComponent(props); // never do this
 ```
 
-Other than for testing, you would normally __never__ call this constructor yourself. React calls it for you.
+除非为了测试，正常情况下不要自己调用该构造函数。React 帮你调用这个函数。
 
-Instead, you pass the `ReactComponent` Class to `createElement` you get a `ReactElement`.
+相反，把 `ReactComponent` 类传给 `createElement`，就会得到一个 `ReactElement` 实例。
 
 ```javascript
 var element = React.createElement(MyComponent);
 ```
 
-OR using JSX:
+或者使用 JSX：
 
 ```javascript
 var element = <MyComponent />;
 ```
 
-When this is passed to `React.render`, React will call the constructor for you and create a `ReactComponent`, which returned.
+当该实例传给 `React.render` 的时候，React 将会调用构造函数，然后创建并返回一个 `ReactComponent`。
 
 ```javascript
 var component = React.render(element, document.body);
 ```
 
-If you keep calling `React.render` with the same type of `ReactElement` and the same container DOM `Element` it always returns the same instance. This instance is stateful.
+如果一直用相同的 `ReactElement` 类型和相同的 DOM `元素`容器调用 `React.render`，将会总是返回相同的实例。该实例是状态化的。
 
 ```javascript
 var componentA = React.render(<MyComponent />, document.body);
@@ -132,20 +134,21 @@ var componentB = React.render(<MyComponent />, document.body);
 componentA === componentB; // true
 ```
 
-This is why you shouldn't construct your own instance. Instead, `ReactElement` is a virtual `ReactComponent` before it gets constructed. An old and new `ReactElement` can be compared to see if a new `ReactComponent` instance is created or if the existing one is reused.
+这就是为什么不应该创建你自己的实例。相反，在创建之前，`ReactElement` 是一个虚拟的 `ReactComponent`。新旧 `ReactElement` 可以比对，从而决定是创建一个新的 `ReactComponent` 实例还是重用已有的实例。
 
-The `render` method of a `ReactComponent` is expected to return another `ReactElement`. This allows these components to be composed. Ultimately the render resolves into `ReactElement` with a `string` tag which instantiates a DOM `Element` instance and inserts it into the document.
+`ReactComponent` 的 `render` 方法应该返回另一个 `ReactElement`，这就允许组件被组装。
+（The `render` method of a `ReactComponent` is expected to return another `ReactElement`. This allows these components to be composed. Ultimately the render resolves into `ReactElement` with a `string` tag which instantiates a DOM `Element` instance and inserts it into the document.）
 
 
-## Formal Type Definitions
+## 正式的类型定义
 
-__Entry Point__
+__入口点（Entry Point）__
 
 ```
 React.render = (ReactElement, HTMLElement | SVGElement) => ReactComponent;
 ```
 
-__Nodes and Elements__
+__节点和元素（Nodes and Elements）__
 
 ```
 type ReactNode = ReactElement | ReactFragment | ReactText;
@@ -179,7 +182,7 @@ type ReactText = string | number;
 type ReactEmpty = null | undefined | boolean;
 ```
 
-__Classes and Components__
+__类和组件（Classes and Components）__
 
 ```
 type ReactClass<TProps> = (TProps) => ReactComponent<TProps>;

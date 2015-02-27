@@ -80,6 +80,7 @@ $ open http://localhost:4000/react/
 * [与 DOM 的差异](/zh/docs/ref-06-dom-differences.md)
 * [特殊的非 DOM 属性](/zh/docs/ref-07-special-non-dom-attributes.md)
 * [Reconciliation](/zh/docs/ref-08-reconciliation.md)
+* [React （虚拟）DOM 术语](/zh/docs/ref-09-glossary.md)
 
 ## Flux
 
