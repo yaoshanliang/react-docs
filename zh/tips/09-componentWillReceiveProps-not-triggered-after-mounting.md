@@ -1,6 +1,6 @@
 ---
 id: componentWillReceiveProps-not-triggered-after-mounting
-title: componentWillReceiveProps Not Triggered After Mounting
+title: Mounting 之后 componentWillReceiveProps 未被触发
 layout: tips
 permalink: componentWillReceiveProps-not-triggered-after-mounting.html
 prev: controlled-input-null-value.html
