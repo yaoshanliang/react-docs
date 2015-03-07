@@ -1,13 +1,14 @@
 ---
 id: use-react-with-other-libraries
-title: Use React with Other Libraries
+title: 与其他类库并行使用React
 layout: tips
 permalink: use-react-with-other-libraries.html
 prev: children-undefined.html
 next: dangerously-set-inner-html.html
 ---
 
-You don't have to go full React. The component [lifecycle events](/react/docs/component-specs.html#lifecycle-methods), especially `componentDidMount` and `componentDidUpdate`, are good places to put your other libraries' logic.
+
+你不用非得全部采用 React。组件的 [生命周期事件](/react/docs/component-specs.html#lifecycle-methods)，特别是`componentDidMount` 和 `componentDidUpdate`，非常适合放置其他类库的逻辑代码。
 
 ```js
 var App = React.createClass({
@@ -37,3 +38,5 @@ React.render(<App />, mountNode);
 ```
 
 You can attach your own [event listeners](/react/tips/dom-event-listeners.html) and even [event streams](https://baconjs.github.io) this way.
+
+你还可以通过这种方式来绑定你自己的 [事件监听（event listeners）](/react/tips/dom-event-listeners.html) 甚至是 [事件流（event streams）](https://baconjs.github.io)。
