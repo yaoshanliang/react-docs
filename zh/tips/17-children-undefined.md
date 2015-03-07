@@ -7,7 +7,6 @@ prev: references-to-components.html
 next: use-react-with-other-libraries.html
 ---
 
-You can't access the children of your component through `this.props.children`. `this.props.children` designates the children being **passed onto you** by the owner:
 
 你没办法通过 `this.props.children` 取得当前组件的子元素。 因为`this.props.children` 返回的是组件拥有者传递给你的 **passed onto you** 子节点。
 
@@ -26,7 +25,5 @@ var App = React.createClass({
 
 React.render(<App></App>, mountNode);
 ```
-
-For a more sophisticated example, refer to the last example on the [front page](/).
 
 如果想看更多地例子， 可以参考在 [front page](/) 里最后一个例子。

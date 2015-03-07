@@ -7,21 +7,16 @@ prev: componentWillReceiveProps-not-triggered-after-mounting.html
 next: dom-event-listeners.html
 ---
 
-> Note:
->
-> This isn't really a React-specific tip, as such anti-patterns often occur in code in general; in this case, React simply points them out more clearly.
 
 > 注意：
 > 
 > 这实际上不是一篇单独的 React 提示，因为类似的反模式设计也经常会在平时的编码中出现；这里，React 只是简单清晰地指出来这个问题
 
-Using props, passed down from parent, to generate state in `getInitialState` often leads to duplication of "source of truth", i.e. where the real data is. Whenever possible, compute values on-the-fly to ensure that they don't get out of sync later on and cause maintenance trouble.
 
 使用 props, 自父级向下级传递，在使用 `getInitialState` 生成 state 的时候，经常会导致重复的"来源信任"，i.e. 如果有可能，请尽量在使用的时候计算值，以此来确保不会出现同步延迟的问题和状态保持的问题。
 
 **糟糕的例子**
 
-**Bad example:**
 
 ```js
 var MessageBox = React.createClass({
@@ -55,7 +50,6 @@ React.render(<MessageBox name="Rogers"/>, mountNode);
 
 (对于更复杂的逻辑，最好通过方法将数据处理分离开来)
 
-However, it's **not** an anti-pattern if you make it clear that synchronization's not the goal here:
 
 然而，如果你理清了这些，那么它也就 **不是** 反模式了。两者兼得不是我们的目标：
 

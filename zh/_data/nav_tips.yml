@@ -11,9 +11,9 @@
   - id: maximum-number-of-jsx-root-nodes
     title: JSX 根节点的最大数量
   - id: style-props-value-px
-    title: Shorthand for Specifying Pixel Values in style props
+    title: 在样式props中快速制定像素值
   - id: children-props-type
-    title: 子属性的类型
+    title: 子props的类型
   - id: controlled-input-null-value
     title: 值为 null 的 Controlled Input
   - id: componentWillReceiveProps-not-triggered-after-mounting

@@ -7,9 +7,6 @@ prev: controlled-input-null-value.html
 next: props-in-getInitialState-as-anti-pattern.html
 ---
 
-`componentWillReceiveProps` isn't triggered after the node is put on scene. This is by design. Check out [other lifecycle methods](/react/docs/component-specs.html) for the one that suits your needs.
-
-The reason for that is because `componentWillReceiveProps` often handles the logic of comparing with the old props and acting upon changes; not triggering it at mounting (where there are no old props) helps in defining what the method does.
 
 当节点初次被放入的时候 `componentWillReceiveProps` 并不会被触发。这是故意这么设计的。查看更多 [其他生命周期的方法](/react/docs/component-specs.html) 。
 
