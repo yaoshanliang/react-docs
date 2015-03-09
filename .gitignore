@@ -6,3 +6,4 @@ Gemfile.lock
 downloads
 zh-old
 *.log
+.DS_Store
