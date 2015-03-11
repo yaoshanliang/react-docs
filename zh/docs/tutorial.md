@@ -24,13 +24,13 @@ next: thinking-in-react.html
 
 ### <a class="anchor" name="running-a-server"></a>运行一个服务器
 
-虽然它不是入门教程的必需品，但接下来我们会添加一个功能，发送 `POST` ing请求到服务器。如果这是你熟知的事并且你想创建你自己的服务器，那么就这样干吧。而对于另外的一部分人，为了让你集中精力学习，而不用担忧服务器端方面，我们已经用了以下一系列的语言编写了简单的服务器代码 - JavaScript（使用Node.js），Python和Ruby。所有代码都在GitHub。你可以[查看代码](ttps://github.com/reactjs/react-tutorial/)或者[下载zip文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
+虽然它不是入门教程的必需品，但接下来我们会添加一个功能，发送 `POST` ing请求到服务器。如果这是你熟知的事并且你想创建你自己的服务器，那么就这样干吧。而对于另外的一部分人，为了让你集中精力学习，而不用担忧服务器端方面，我们已经用了以下一系列的语言编写了简单的服务器代码 - JavaScript（使用Node.js），Python和Ruby。所有代码都在GitHub。你可以[查看代码](ttps://github.com/reactjs/react-tutorial/)或者[下载 zip 文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
 
 开始使用下载的教程，只需开始编辑 `public/index.html` 。
 
 ### 开始学习
 
-在这个教程里面，我们将使用放在CDN上预构建好的JavaScript文件。打开你最喜欢的编辑器，创建一个新的HTML文档：
+在这个教程里面，我们将使用放在 CDN 上预构建好的 JavaScript 文件。打开你最喜欢的编辑器，创建一个新的 HTML 文档：
 
 ```html
 <!-- index.html -->
@@ -50,15 +50,15 @@ next: thinking-in-react.html
 </html>
 ```
 
-在本教程其余的部分，我们将在此script标签中编写我们的JavaScript代码。
+在本教程其余的部分，我们将在此 script 标签中编写我们的 JavaScript 代码。
 
 > 注意：
 >
-> 因为我们想简化ajax请求代码，所以在这里引入jQuery，但是它对 React 并不是必须的。
+> 因为我们想简化 ajax 请求代码，所以在这里引入 jQuery，但是它对 React 并不是必须的。
 
 ### 你的第一个组件
 
-React中全是模块化、可组装的组件。以我们的评论框为例，我们将有如下的组件结构：
+React 中全是模块化、可组装的组件。以我们的评论框为例，我们将有如下的组件结构：
 
 ```
 - CommentBox
@@ -67,7 +67,7 @@ React中全是模块化、可组装的组件。以我们的评论框为例，我
   - CommentForm
 ```
 
-让我们构造`CommentBox`组件，它只是一个简单的 `<div>` 而已：
+让我们构造 `CommentBox` 组件，它只是一个简单的 `<div>` 而已：
 
 ```javascript
 // tutorial1.js
@@ -88,7 +88,7 @@ React.render(
 
 #### JSX语法
 
-首先你注意到JavaScript代码中XML式的语法语句。我们有一个简单的预编译器，用于将这种语法糖转换成纯的JavaScript代码：
+首先你注意到 JavaScript 代码中 XML 式的语法语句。我们有一个简单的预编译器，用于将这种语法糖转换成纯的 JavaScript 代码：
 
 ```javascript
 // tutorial1-raw.js
@@ -107,21 +107,21 @@ React.render(
 );
 ```
 
-JSX语法是可选的，但是我们发现JSX语句比纯JavaScript更加容易使用。阅读更多关于[JSX语法的文章](/react/docs/jsx-in-depth.html)。
+JSX 语法是可选的，但是我们发现 JSX 语句比纯 JavaScript 更加容易使用。阅读更多关于[JSX 语法的文章](/react/docs/jsx-in-depth.html)。
 
 #### 发生了什么
 
-我们通过JavaScript对象传递一些方法到`React.createClass()`来创建一个新的React组件。其中最重要的方法是`render`，该方法返回一颗React组件树，这棵树最终将会渲染成HTML。
+我们通过 JavaScript 对象传递一些方法到 `React.createClass()` 来创建一个新的React组件。其中最重要的方法是 `render`，该方法返回一颗 React 组件树，这棵树最终将会渲染成 HTML。
 
-这个`<div>`标签不是真实的DOM节点；他们是React`div`组件的实例。你可以认为这些就是React知道如何处理的标记或者一些数据。React是**安全的**。我们不生成HTML字符串，因此默认阻止了XSS攻击。
+这个 `<div>` 标签不是真实的DOM节点；他们是 React `div` 组件的实例。你可以认为这些就是React知道如何处理的标记或者一些数据。React 是**安全的**。我们不生成 HTML 字符串，因此默认阻止了 XSS 攻击。
 
-你没有必要返回基本的HTML。你可以返回一个你（或者其他人）创建的组件树。这就使得React变得**组件化**：一个关键的前端维护原则。
+你没有必要返回基本的 HTML。你可以返回一个你（或者其他人）创建的组件树。这就使得 React 变得**组件化**：一个关键的前端维护原则。
 
-`React.render()`实例化根组件，启动框架，注入标记到原始的DOM元素中，作为第二个参数提供。
+`React.render()` 实例化根组件，启动框架，注入标记到原始的 DOM 元素中，作为第二个参数提供。
 
 ## 制作组件
 
-让我们为`CommentList`和`CommentForm`构建骨架，这也会是一些简单的`<div>`：
+让我们为 `CommentList` 和 `CommentForm` 构建骨架，这也会是一些简单的 `<div>` ：
 
 ```javascript
 // tutorial2.js
@@ -146,7 +146,7 @@ var CommentForm = React.createClass({
 });
 ```
 
-下一步，更新`CommentBox`组件，使用这些新的组件：
+下一步，更新 `CommentBox` 组件，使用这些新的组件：
 
 ```javascript{6-8}
 // tutorial3.js
@@ -163,11 +163,11 @@ var CommentBox = React.createClass({
 });
 ```
 
-注意我们是如何混合HTML标签和我们创建的组件。HTML组件就是普通的React组件，就像你定义的一样，只有一点不一样。JSX编译器会自动重写HTML标签为`React.createElement(tagName)`表达式，其它什么都不做。这是为了避免全局命名空间污染。
+注意我们是如何混合 HTML 标签和我们创建的组件。HTML 组件就是普通的 React 组件，就像你定义的一样，只有一点不一样。JSX 编译器会自动重写 HTML 标签为 `React.createElement(tagName)` 表达式，其它什么都不做。这是为了避免全局命名空间污染。
 
 ### 组件属性
 
-让我们创建我们的第三个组件，`Comment`。我们想传递给它作者名字和评论文本，以便于我们能够对每一个独立的评论重用相同的代码。首先让我们添加一些评论到`CommentList`：
+让我们创建我们的第三个组件，`Comment`。我们想传递给它作者名字和评论文本，以便于我们能够对每一个独立的评论重用相同的代码。首先让我们添加一些评论到 `CommentList`：
 
 ```javascript{6-7}
 // tutorial4.js
@@ -183,11 +183,11 @@ var CommentList = React.createClass({
 });
 ```
 
-请注意，我们已经从父节点`CommentList`组件传递给子节点`Comment`组件一些数据。例如，我们传递了*Pete Hunt*（通过一个属性）和*This is one comment*（通过类似于XML的子节点）给第一个`Comment`。从父节点传递到子节点的数据称为**props**，是属性（properties）的缩写。
+请注意，我们已经从父节点 `CommentList` 组件传递给子节点 `Comment` 组件一些数据。例如，我们传递了 *Pete Hunt* （通过一个属性）和 *This is one comment * （通过类似于XML的子节点）给第一个 `Comment`。从父节点传递到子节点的数据称为 **props**，是属性（properties）的缩写。
 
 ### 使用props
 
-让我们创建评论组件。使用**props**，我们就能够在其中读取到从`CommentList`传递过来的数据，然后渲染一些标记：
+让我们创建评论组件。通过 **props**，就能够从中读取到从 `CommentList` 传递过来的数据，然后渲染一些标记：
 
 ```javascript
 // tutorial5.js
@@ -205,13 +205,13 @@ var Comment = React.createClass({
 });
 ```
 
-在JSX中通过将JavaScript表达式放在大括号中（作为属性或者子节点），你可以生成文本或者React组件到节点树中。我们访问传递给组件的命名属性作为`this.props`的键，任何内嵌的元素作为`this.props.children`。
+在 JSX 中通过将 JavaScript 表达式放在大括号中（作为属性或者子节点），你可以生成文本或者 React 组件到节点树中。我们访问传递给组件的命名属性作为 `this.props` 的键，任何内嵌的元素作为 `this.props.children`。
 
-### 添加Markdown
+### 添加 Markdown
 
-Markdown是一种简单的格式化内联文本的方式。例如，用星号包裹文本将会使其强调突出。
+Markdown 是一种简单的格式化内联文本的方式。例如，用星号包裹文本将会使其强调突出。
 
-首先，添加第三方的**Showdown**库到你的应用。这是一个JavaScript库，处理Markdown文本并且转换为原始的HTML。这需要在你的头部添加一个script标签（我们已经在React操练场上包含了这个标签）：
+首先，添加第三方的 **Showdown** 库到你的应用。这是一个JavaScript库，处理 Markdown 文本并且转换为原始的 HTML。这需要在你的头部添加一个 script 标签（我们已经在 React 操练场上包含了这个标签）：
 
 ```html{7}
 <!-- index.html -->
@@ -224,7 +224,7 @@ Markdown是一种简单的格式化内联文本的方式。例如，用星号包
 </head>
 ```
 
-下一步，让我们转换评论文本为Markdown格式，然后输出它：
+下一步，让我们转换评论文本为 Markdown 格式，然后输出它：
 
 ```javascript{2,10}
 // tutorial6.js
@@ -243,11 +243,11 @@ var Comment = React.createClass({
 });
 ```
 
-我们在这里唯一需要做的就是调用Showdown库。我们需要把`this.props.children`从React的包裹文本转换成Showdown能处理的原始的字符串，所以我们显示地调用了`toString()`。
+我们在这里唯一需要做的就是调用 Showdown 库。我们需要把`this.props.children`从 React 的包裹文本转换成 Showdown 能处理的原始的字符串，所以我们显示地调用了`toString()`。
 
-但是这里有一个问题！我们渲染的评论在浏览器里面看起来像这样：“`<p>`This is `<em>`another`</em>` comment`</p>`”。我们想这些标签真正地渲染成HTML。
+但是这里有一个问题！我们渲染的评论在浏览器里面看起来像这样：“`<p>`This is `<em>`another`</em>` comment`</p>`”。我们想这些标签真正地渲染成 HTML。
 
-那是React在保护你免受XSS攻击。这里有一种方法解决这个问题，但是框架会警告你别使用这种方法：
+那是 React 在保护你免受 XSS 攻击。这里有一种方法解决这个问题，但是框架会警告你别使用这种方法：
 
 ```javascript{5,11}
 // tutorial7.js
@@ -267,9 +267,9 @@ var Comment = React.createClass({
 });
 ```
 
-这是一个特殊的API，故意让插入原始的HTML变得困难，但是对于Showdown，我们将利用这个后门。
+这是一个特殊的 API，故意让插入原始的 HTML 变得困难，但是对于 Showdown，我们将利用这个后门。
 
-**记住：** 使用这个功能，你会依赖于Showdown的安全性。
+**记住：** 使用这个功能，你会依赖于 Showdown 的安全性。
 
 ### 接入数据模型
 
@@ -283,7 +283,7 @@ var data = [
 ];
 ```
 
-我们需要用一种模块化的方式将数据传入到`CommentList`。修改`CommentBox`和`React.render()`方法，通过props传递数据到`CommentList`：
+我们需要用一种模块化的方式将数据传入到 `CommentList`。修改 `CommentBox` 和 `React.render()` 方法，通过 props 传递数据到 `CommentList`：
 
 ```javascript{7,15}
 // tutorial9.js
@@ -305,7 +305,7 @@ React.render(
 );
 ```
 
-现在数据在`CommentList`中可用了，让我们动态地渲染评论：
+现在数据在 `CommentList` 中可用了，让我们动态地渲染评论：
 
 ```javascript{4-10,13}
 // tutorial10.js
@@ -345,11 +345,11 @@ React.render(
 
 ### 响应状态变化（Reactive state）
 
-到目前为止，每一个组件都根据自己的props渲染了自己一次。`props`是不可变的：它们从父节点传递过来，被父节点“拥有”。为了实现交互，我们给组件引进了可变的**state**。`this.state`是组件私有的，可以通过调用`this.setState()`来改变它。当状态更新之后，组件重新渲染自己。
+到目前为止，每一个组件都根据自己的 props 渲染了自己一次。`props` 是不可变的：它们从父节点传递过来，被父节点“拥有”。为了实现交互，我们给组件引进了可变的 **state**。`this.state` 是组件私有的，可以通过调用 `this.setState()` 来改变它。当状态更新之后，组件重新渲染自己。
 
 `render()` methods are written declaratively as functions of `this.props` and `this.state`. 框架确保UI始终和输入保持一致。
 
-当服务器获取数据的时候，我们将会用已有的数据改变评论。让我们给`CommentBox`组件添加一个评论数组作为它的状态：
+当服务器获取数据的时候，我们将会用已有的数据改变评论。让我们给 `CommentBox` 组件添加一个评论数组作为它的状态：
 
 ```javascript{3-5,10}
 // tutorial12.js
