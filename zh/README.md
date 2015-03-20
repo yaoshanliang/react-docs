@@ -86,6 +86,11 @@ $ open http://localhost:4000/react/
 
 * [Flux](/zh/docs/flux-overview.md)
 
+## Blog
+
+* [React v0.13.1](/zh/_posts/2015-03-16-react-v0.13.1.md)
+* [React v0.13](/zh/_posts/2015-03-10-react-v0.13.md)
+
 # 翻译规范
 
 [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
