@@ -1,32 +1,32 @@
 ---
-title: "Building The Facebook News Feed With Relay"
+title: "用 Relay 构建 Facebook 的 New Feed 应用"
 author: Joseph Savona
 ---
 
-At React.js Conf in January we gave a preview of Relay, a new framework for building data-driven applications in React. In this post we'll describe the process of creating a Relay application. This post assumes some familiarity with the concepts of Relay and GraphQL, so if you haven't already we recommend reading [our introductory blog post](http://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html) or watching [the conference talk](https://www.youtube.com/watch?v=9sc8Pyc51uU).
+在一月份的 React.js Conf 上，我们展示了一个 Relay 的预览版，它是一个新的在 React 中创建数据驱动应用的框架。这篇文章将会描述创建一个 Relay 应用的过程。这篇文章假设读者已经熟悉 Relay 和 GraphQL 的一些概念，因此如果你还不熟悉的话，建议先阅读[我们的简述博客](http://facebook.github.io/react/blog/2015/02/20/introducing-relay-and-graphql.html)或者观看[会议直播](https://www.youtube.com/watch?v=9sc8Pyc51uU)。
 
-We're working hard to prepare GraphQL and Relay for public release. In the meantime, we'll continue to provide information about what you can expect.
-
-<br/>
-
-## The Relay Architecture
-
-The diagram below shows the main parts of the Relay architecture on the client and the server:
-
-<img src="/react/img/blog/relay-components/relay-architecture.png" alt="Relay Architecture" width="650" />
-
-The main pieces are as follows:
-
-- Relay Components: React components annotated with declarative data descriptions.
-- Actions: Descriptions of how data should change in response to user actions.
-- Relay Store: A client-side data store that is fully managed by the framework.
-- Server: An HTTP server with GraphQL endpoints (one for reads, one for writes) that respond to GraphQL queries.
-
-This post will focus on **Relay components** that describe encapsulated units of UI and their data dependencies. These components form the majority of a Relay application.
+我们为公开发布 GraphQL 和 Relay 而努力准备。与此同时，我们将会继续提供你期待的信息。
 
 <br/>
 
-## A Relay Application
+## Relay 架构
+
+下面的图片展示了在客户端和服务器端 Relay 架构的主要部分：
+
+<img src="http://facebook.github.io/react/img/blog/relay-components/relay-architecture.png" alt="Relay 架构" width="650" />
+
+主要部分如下：
+
+- Relay components： 反应数据的 React 组件。
+- Actions： 当用户操作的时候，相应的数据应该如何改变的描述。
+- Relay Store： 一个客户端的完全被框架管理的数据存储器。
+- Server： 一个带有 GraphQL 终端的 HTTP 服务器（一个用于读，一个用于写），用于响应 GraphQL 查询。
+
+这篇文章将会集中在 **Relay 组件** 上，描述 UI 封装单元以及它们的数据依赖。这些组件构成了 Relay 应用的主要部分。
+
+<br/>
+
+## 一个 Relay 应用
 
 To see how components work and can be composed, let's implement a basic version of the Facebook News Feed in Relay. Our application will have two components: a `<NewsFeed>` that renders a list of `<Story>` items. We'll introduce the plain React version of each component first and then convert it to a Relay component. The goal is something like the following:
 
