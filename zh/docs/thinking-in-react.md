@@ -1,6 +1,6 @@
 ---
 id: thinking-in-react
-title: 深入理解React
+title: 深入理解 React
 prev: tutorial.html
 next: videos.html
 ---
@@ -86,68 +86,67 @@ JSON接口返回数据如下：
 
 为了使 UI 可交互，需要能够触发底层数据模型的变化。 React 通过 **state** 使这变得简单。
 
-为了正确构建应用，首先需要考虑应用需要的最小的可变 state 数据模型集合。此处关键点在于精简：*不要存储重复的数据*。
-To build your app correctly you first need to think of the minimal set of mutable state that your app needs. The key here is DRY: *Don't Repeat Yourself*. Figure out what the absolute minimal representation of the state of your application needs to be and compute everything else you need on-demand. For example, if you're building a TODO list, just keep an array of the TODO items around; don't keep a separate state variable for the count. Instead, when you want to render the TODO count simply take the length of the TODO items array.
+为了正确构建应用，首先需要考虑应用需要的最小的可变 state 数据模型集合。此处关键点在于精简：*不要存储重复的数据*。构造出绝对最小的满足应用需要的最小 state 是有必要的，并且计算出其它强烈需要的东西。例如，如果构建一个 TODO 列表，仅保存一个 TODO 列表项的数组，而不要保存另外一个指代数组长度的 state 变量。当想要渲染 TODO 列表项总数的时候，简单地取出 TODO 列表项数组的长度就可以了。
 
-Think of all of the pieces of data in our example application. We have:
+思考示例应用中的所有数据片段，有：
 
-  * The original list of products
-  * The search text the user has entered
-  * The value of the checkbox
-  * The filtered list of products
+  * 最初的 products 列表
+  * 用户输入的搜索文本
+  * 复选框的值
+  * 过滤后的 products 列表
 
-Let's go through each one and figure out which one is state. Simply ask three questions about each piece of data:
+让我们分析每一项，指出哪一个是 state 。简单地对每一项数据提出三个问题：
 
-  1. Is it passed in from a parent via props? If so, it probably isn't state.
-  2. Does it change over time? If not, it probably isn't state.
-  3. Can you compute it based on any other state or props in your component? If so, it's not state.
+  1、是否是从父级通过 propr 传入的？如果是，可能不是 state 。
+  2、是否会随着时间改变？如果不是，可能不是 state 。
+  3、能根据组件中其它 state 数据或者 props 计算出来吗？如果是，就不是 state 。
 
-The original list of products is passed in as props, so that's not state. The search text and the checkbox seem to be state since they change over time and can't be computed from anything. And finally, the filtered list of products isn't state because it can be computed by combining the original list of products with the search text and value of the checkbox.
+初始的 products 列表通过 props 传入，所以不是 state 。搜索文本和复选框看起来像是 state ，因为它们随着时间改变，也不能根据其它数据计算出来。最后，过滤的 products 列表不是 state ，因为可以通过搜索文本和复选框的值从初始的 products 列表计算出来。
 
-So finally, our state is:
+所以最终， state 是：
 
-  * The search text the user has entered
-  * The value of the checkbox
+  * 用户输入的搜索文本
+  * 复选框的值
 
-## Step 4: Identify where your state should live
+## 第四步：确认 state 的生命周期
 
 <iframe width="100%" height="300" src="http://jsfiddle.net/reactjs/zafjbw1e/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-OK, so we've identified what the minimal set of app state is. Next we need to identify which component mutates, or *owns*, this state.
+OK，我们辨别出了应用的 state 数据模型的最小集合。接下来，需要指出哪个组件会改变或者说*拥有*这个 state 数据模型。
 
-Remember: React is all about one-way data flow down the component hierarchy. It may not be immediately clear which component should own what state. **This is often the most challenging part for newcomers to understand,** so follow these steps to figure it out:
+记住： React 中数据是沿着组件树从上到下单向流动的。可能不会立刻明白哪个组件应该拥有哪些 state 数据模型。**这对新手通常是最难理解和最具挑战的，**因此跟随以下步骤来弄清楚这点：
 
-For each piece of state in your application:
+对于应用中的每一个 state 数据：
 
-  * Identify every component that renders something based on that state.
-  * Find a common owner component (a single component above all the components that need the state in the hierarchy).
-  * Either the common owner or another component higher up in the hierarchy should own the state.
-  * If you can't find a component where it makes sense to own the state, create a new component simply for holding the state and add it somewhere in the hierarchy above the common owner component.
+  * 找出每一个基于那个 state 渲染界面的组件。
+  * 找出共同的祖先组件（某个单个的组件，在组件树中位于需要这个 state 的所有组件的上面）。
+  * 要么是共同的祖先组件，要么是另外一个在组件树中位于更高层级的组件应该拥有这个 state 。
+  * 如果找不出拥有这个 state 数据模型的合适的组件，创建一个新的组件来维护这个 state ，然后添加到组件树中，层级位于所有共同拥有者组件的上面。
 
-Let's run through this strategy for our application:
+让我们在应用中应用这个策略：
 
-  * `ProductTable` needs to filter the product list based on state and `SearchBar` needs to display the search text and checked state.
-  * The common owner component is `FilterableProductTable`.
-  * It conceptually makes sense for the filter text and checked value to live in `FilterableProductTable`
+  * `ProductTable` 需要基于 state 过滤产品列表，`SearchBar` 需要显示搜索文本和复选框状态。
+  * 共同拥有者组件是 `FilterableProductTable` 。
+  * 理论上，过滤文本和复选框值位于 `FilterableProductTable` 中是合适的。
 
-Cool, so we've decided that our state lives in `FilterableProductTable`. First, add a `getInitialState()` method to `FilterableProductTable` that returns `{filterText: '', inStockOnly: false}` to reflect the initial state of your application. Then pass `filterText` and `inStockOnly` to `ProductTable` and `SearchBar` as a prop. Finally, use these props to filter the rows in `ProductTable` and set the values of the form fields in `SearchBar`.
+太酷了，我们决定了 state 数据模型位于 `FilterableProductTable` 之中。首先，给 `FilterableProductTable` 添加 `getInitialState()` 方法，该方法返回 `{filterText: '', inStockOnly: false}` 来反映应用的初始化状态。然后传递 `filterText` 和 `inStockOnly` 给 `ProductTable` 和 `SearchBar` 作为 prop 。最后，使用这些 props 来过滤 `ProductTable` 中的行，设置在 `SearchBar` 中表单字段的值。
 
-You can start seeing how your application will behave: set `filterText` to `"ball"` and refresh your app. You'll see the data table is updated correctly.
+你可以开始观察应用将会如何运行：设置 `filterText` 为 `"ball"` ，然后刷新应用。将会看到数据表格被正确更新了。
 
-## Step 5: Add inverse data flow
+## 第五步：添加反向数据流
 
 <iframe width="100%" height="300" src="http://jsfiddle.net/reactjs/n47gckhr/embedded/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
 
-So far we've built an app that renders correctly as a function of props and state flowing down the hierarchy. Now it's time to support data flowing the other way: the form components deep in the hierarchy need to update the state in `FilterableProductTable`.
+到目前为止，已经构建了渲染正确的基于 props 和 state 的沿着组件树从上至下单向数据流动的应用。现在，是时候支持另外一种数据流动方式了：组件树中层级很深的表单组件需要更新 `FilterableProductTable` 中的 state 。
 
-React makes this data flow explicit to make it easy to understand how your program works, but it does require a little more typing than traditional two-way data binding. React provides an add-on called `ReactLink` to make this pattern as convenient as two-way binding, but for the purpose of this post we'll keep everything explicit.
+React 让这种数据流动非常明确，从而很容易理解应用是如何工作的，但是相对于传统的双向数据绑定，确实需要输入更多的东西。 React 提供了一个叫做 `ReactLink` 的插件来使其和双向数据绑定一样方便，但是考虑到这篇文章的目的，我们将会保持所有东西都直截了当。
 
-If you try to type or check the box in the current version of the example you'll see that React ignores your input. This is intentional, as we've set the `value` prop of the `input` to always be equal to the `state` passed in from `FilterableProductTable`.
+如果你尝试在示例的当前版本中输入或者选中复选框，将会发现 React 会忽略你的输入。这是有意的，因为已经设置了 `input` 的 `value` 属性，使其总是与从 `FilterableProductTable` 传递过来的 `state` 一致。
 
-Let's think about what we want to happen. We want to make sure that whenever the user changes the form we update the state to reflect the user input. Since components should only update their own state, `FilterableProductTable` will pass a callback to `SearchBar` that will fire whenever the state should be updated. We can use the `onChange` event on the inputs to be notified of it. And the callback passed by `FilterableProductTable` will call `setState()` and the app will be updated.
+让我们思考下我们希望发生什么。我们想确保无论何时用户改变了表单，都要更新 state 来反映用户的输入。由于组件只能更新自己的 state ， `FilterableProductTable` 将会传递一个回调函数给 `SearchBar` ，此函数将会在 state 应该被改变的时候触发。我们可以使用 input 的 `onChange` 事件来监听用户输入，从而确定何时触发回调函数。 `FilterableProductTable` 传递的回调函数将会调用 `setState()` ，然后应用将会被更新。
 
-Though this sounds like a lot it's really just a few lines of code. And it's really explicit how your data is flowing throughout the app.
+虽然这听起来有很多内容，但是实际上仅仅需要几行代码。并且关于数据在应用中如何流动真的非常清晰明确。
 
-## And that's it
+## 就这么简单
 
-Hopefully this gives you an idea of how to think about building components and applications with React. While it may be a little more typing than you're used to, remember that code is read far more than it's written, and it's extremely easy to read this modular, explicit code. As you start to build large libraries of components you'll appreciate this explicitness and modularity, and with code reuse your lines of code will start to shrink :)
+希望以上内容让你明白了如何思考用 React 去构造组件和应用。虽然可能比你之前要输入更多的代码，记住，读代码的时间远比写代码的时间多，并且阅读这种模块化的清晰的代码是相当容易的。当你开始构建大型的组件库的时候，你将会非常感激这种清晰性和模块化，并且随着代码的复用，整个项目代码量就开始变少了 :)。
