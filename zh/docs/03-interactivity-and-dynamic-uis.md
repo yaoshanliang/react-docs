@@ -79,7 +79,7 @@ React 里，只需更新组件的 state，然后根据新的 state 重新渲染�
 
 ## 哪些 *不应该* 作为 State？
 
-`this.state` 应该仅包括能表示用户界面状态所需的最少数据。因些，它不应该包括：
+`this.state` 应该仅包括能表示用户界面状态所需的最少数据。因此，它不应该包括：
 
 * **计算所得数据：** 不要担心根据 state 来预先计算数据 —— 把所有的计算都放到 `render()` 里更容易保证用户界面和数据的一致性。例如，在 state 里有一个数组（listItems），我们要把数组长度渲染成字符串， 直接在 `render()` 里使用 `this.state.listItems.length + ' list items'` 比把它放到 state 里好的多。
 * **React 组件：** 在 `render()` 里使用当前 props 和 state 来创建它。
