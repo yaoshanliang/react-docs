@@ -91,7 +91,7 @@ JSX 类似于 HTML，但不是完全一样。参考 [JSX 陷阱](/react/docs/jsx
 
 ## 没有 JSX 的 React
 
-你完全可以选择是否使用 JSX，并不是 React 必须的。你可以通过 `React.createElement` 来创建一个树。第一个参数是标签，第二个参数是一个属性对象，每三个是子节点。
+你完全可以选择是否使用 JSX，并不是 React 必须的。你可以通过 `React.createElement` 来创建一个树。第一个参数是标签，第二个参数是一个属性对象，第三个是子节点。
 
 ```javascript
 var child = React.createElement('li', null, 'Text Content');
