@@ -56,7 +56,7 @@ DOMDataTransfer clipboardData
 
 ### 键盘事件：
 
-时间名字：
+事件名：
 
 ```
 onKeyDown onKeyPress onKeyUp
