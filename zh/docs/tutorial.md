@@ -24,7 +24,7 @@ next: thinking-in-react.html
 
 ### <a class="anchor" name="running-a-server"></a>运行一个服务器
 
-虽然它不是入门教程的必需品，但接下来我们会添加一个功能，发送 `POST` ing请求到服务器。如果这是你熟知的事并且你想创建你自己的服务器，那么就这样干吧。而对于另外的一部分人，为了让你集中精力学习，而不用担忧服务器端方面，我们已经用了以下一系列的语言编写了简单的服务器代码 - JavaScript（使用Node.js），Python和Ruby。所有代码都在GitHub。你可以[查看代码](ttps://github.com/reactjs/react-tutorial/)或者[下载 zip 文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
+虽然它不是入门教程的必需品，但接下来我们会添加一个功能，发送 `POST` ing请求到服务器。如果这是你熟知的事并且你想创建你自己的服务器，那么就这样干吧。而对于另外的一部分人，为了让你集中精力学习，而不用担忧服务器端方面，我们已经用了以下一系列的语言编写了简单的服务器代码 - JavaScript（使用Node.js），Python和Ruby。所有代码都在GitHub。你可以[查看代码](https://github.com/reactjs/react-tutorial/)或者[下载 zip 文件](https://github.com/reactjs/react-tutorial/archive/master.zip)来开始学习。
 
 开始使用下载的教程，只需开始编辑 `public/index.html` 。
 
