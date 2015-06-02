@@ -698,4 +698,4 @@ var CommentBox = React.createClass({
 
 ### 祝贺你!
 
-你刚刚通过一些简单步骤够早了一个评论框。了解更多关于[为什么使用React](/react/docs/why-react.html)的内容，或者深入学习[API参考](/react/docs/top-level-api.html)，开始专研！祝你好运！
+你刚刚通过一些简单步骤构造了一个评论框。了解更多关于[为什么使用React](/react/docs/why-react.html)的内容，或者深入学习[API参考](/react/docs/top-level-api.html)，开始专研！祝你好运！
