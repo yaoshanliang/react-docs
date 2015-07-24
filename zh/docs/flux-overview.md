@@ -49,7 +49,7 @@ Flux使用单向的数据流动来避开MVC. 当用户与React视图交互的时
 
 
 
-这种的响应式编程，或者更准确的说数据流编程亦或基于数据流的编程，可以使我们很容易去推断我们的应用是如何工作的。因为我们的应用中数据是单项流动的，不存在双向绑定。应用的状态只保存在store中，这就允许应用中不同部分保持高度的低耦合。虽然依赖在store中也确实存在，但他们之间保持着严格的等级制度，并通过dispacher来管理同步更新。
+这种的响应式编程，或者更准确的说数据流编程亦或基于数据流的编程，可以使我们很容易去推断我们的应用是如何工作的。因为我们的应用中数据是单项流动的，不存在双向绑定。应用的状态只保存在store中，这就允许应用中不同部分保持高度的低耦合。虽然依赖在store中也确实存在，但他们之间保持着严格的等级制度，并通过dispatcher来管理同步更新。
 
 
 我们发现双向绑定会导致瀑布式的更新，一个对象发生变化会引起另一个对象的改变，并可能导致更多的更新。随着应用的增大，这些瀑布流式的更新方式会使我们很难预测用户交互可能会导致的改变。当更新只能以单一回合进行的时候，系统的可预测性也就会变得更高。
@@ -61,7 +61,7 @@ Flux使用单向的数据流动来避开MVC. 当用户与React视图交互的时
 
 dispatcher 就像是一个中央的集线器，管理着所有的数据流。本质上它就是 store callback 的注册表，本身并没有实际的高度功能。它就是一个用来向stores分发actions的机器。 每一个 store 各自注册自己的 callback 以提供对应的处理动作。当 dispatcher 发出一个 action 时，应用中所有的store都会通过注册的callback收到这个action。
 
-随着应用的增长，dispacher会变得更加必不可少，因为它能够指定注册的callback的执行顺序来管理store之间的依赖。store可以被声明等待其他store完成更新之后，再执行更新。
+随着应用的增长，dispatcher会变得更加必不可少，因为它能够指定注册的callback的执行顺序来管理store之间的依赖。store可以被声明等待其他store完成更新之后，再执行更新。
 
 Facebook目前在生产环境中使用的flux可以分别在npm, Bower，or Gihub中获取。
 
@@ -73,7 +73,7 @@ Stores 包含了应用的状态和逻辑，它有点儿像传统MVC中的model�
 举个栗子，Facebook的回看视频编辑器使用TimeStore来保存播放时间和播放状态。另外，应用中的ImageStore保存着图片的集合。再比如说我们的TodoMVC示例中，TodoStore也类似地管理着to-do items的集合。store典型的特征就是既是models的集合，又是所属业务域下的model实例。
 
 
-就像上面所说的，store在dispacher中注册，并提供相应的回调。回调会接收action并把它当成自己的一个参数。当action被触发，回调函数会使用switch语句来解析action中的type参数，并在合适的type下提供钩子来执行内部方法。这就允许action通过dispacher来响应store中的state更新。store更新完成之后，会向应用中广播一个change事件，views可以选择响应事件来重新获取新的数据并更新。
+就像上面所说的，store在dispatcher中注册，并提供相应的回调。回调会接收action并把它当成自己的一个参数。当action被触发，回调函数会使用switch语句来解析action中的type参数，并在合适的type下提供钩子来执行内部方法。这就允许action通过dispatcher来响应store中的state更新。store更新完成之后，会向应用中广播一个change事件，views可以选择响应事件来重新获取新的数据并更新。
 
 ###Views and Controller-Views 
 
@@ -107,7 +107,7 @@ Actions也可能来自其他地方，比如服务器端。这种情况可能会�
 
 ###What About that Dispatcher? 
 
-就像之前提到的那样，dispatcher也可以用来管理store之间的依赖。我们可以通过dispacher的waitFor()方法来实现。在类似TodoMVC这样简单地应用中我们可能用不到这个方法，但是在更大型，更复杂的应用的它会变得不可或缺。
+就像之前提到的那样，dispatcher也可以用来管理store之间的依赖。我们可以通过dispatcher的waitFor()方法来实现。在类似TodoMVC这样简单地应用中我们可能用不到这个方法，但是在更大型，更复杂的应用的它会变得不可或缺。
 
 在执行TodoStore的注册回调时，我们可以明确地等待任何依赖先更新，然后再进行后续的处理：
 
