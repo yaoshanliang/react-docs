@@ -42,4 +42,4 @@ React.render(
 注意 `bind(this, arg1, arg2, ...)` 的使用： 我们通过它向 `handleClick` 传递参数。 这不是 React 的新概念，而是 JavaScript 的。
 
 
-对于没有 父-子 关系的组件间的通信，你可以设置你自己的全局时间系统。 在 `componentDidMount()` 里订阅事件，在 `componentWillUnmount()` 里退订，然后在事件回调里调用 `setState()`。
+对于没有 父-子 关系的组件间的通信，你可以设置你自己的全局事件系统。 在 `componentDidMount()` 里订阅事件，在 `componentWillUnmount()` 里退订，然后在事件回调里调用 `setState()`。
