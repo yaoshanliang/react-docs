@@ -61,6 +61,7 @@ React.render(
 ```html{10}
 <script type="text/jsx" src="src/helloworld.js"></script>
 ```
+请注意，某些浏览器（Chrome浏览器，如）将无法加载该文件，除非它通过HTTP服务。
 
 ### 离线转换
 
