@@ -340,6 +340,7 @@ React.render(
   document.getElementById('content')
 );
 ```
+注意：代码将不会在这一步工作。
 
 这个组件和前面的组件是不一样的，因为它必须重新渲染自己。该组件将不会有任何数据，直到请求从服务器返回，此时该组件或许需要渲染一些新的评论。
 
@@ -383,7 +384,7 @@ var CommentBox = React.createClass({
 ]
 ```
 
-我们将会使用jQuery帮助发出一个一步的请求到服务器。
+我们将会使用jQuery帮助发出一个异步的请求到服务器。
 
 注意：因为这会变成一个AJAX应用，你将会需要使用一个web服务器来开发你的应用，而不是一个放置在你的文件系统上面的一个文件。[如上所述](#running-a-server)，我们已经在[GitHub](https://github.com/reactjs/react-tutorial/)上面提供了几个你可以使用的服务器。这些服务器提供了你学习下面教程所需的功能。
 
@@ -517,7 +518,7 @@ React使用驼峰命名规范的方式给组件绑定事件处理器。我们给
 
 ##### Refs
 
-我们利用`Ref`属性给子组件命名，`this.refs`引用组件。我们可以在组件上调用`getDOMNode()`获取浏览器本地的DOM元素。
+我们利用`ref`属性给子组件命名，`this.refs`引用组件。我们可以在组件上调用`getDOMNode()`获取浏览器本地的DOM元素。
 
 ##### 回调函数作为属性
 
