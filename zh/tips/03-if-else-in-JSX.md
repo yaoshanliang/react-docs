@@ -10,14 +10,6 @@ next: self-closing-tag.html
 你没法在JSX中使用 `if-else` 语句，因为 JSX 只是函数调用和对象创建的语法糖。看下面这个例子：
 
 ```js
-// This JSX:
-React.render(<div id="msg">Hello World!</div>, mountNode);
-
-// Is transformed to this JS:
-React.render(React.createElement("div", {id:"msg"}, "Hello World!"), mountNode);
-```
-
-```js
 // JSX 代码:
 React.render(<div id="msg">Hello World!</div>, mountNode);
 
