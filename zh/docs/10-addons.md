@@ -13,7 +13,7 @@ next: animation.html
 - [`classSet`](class-name-manipulation.html)，用于更加干净简洁地操作 DOM 中的 `class` 字符串。
 - [`cloneWithProps`](clone-with-props.html)，用于实现 React 组件浅复制，同时改变它们的 props 。
 - [`update`](update.html)，一个辅助方法，使得在 JavaScript 中处理不可变数据更加容易。
-- [`PureRednerMixin`](pure-render-mixin.html)，在某些场景下的性能检测器。
+- [`PureRenderMixin`](pure-render-mixin.html)，在某些场景下的性能检测器。
 
 以下插件只存在于 React 开发版（未压缩）：
 
