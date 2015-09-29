@@ -18,13 +18,13 @@ React是很快的，因为它从不直接操作DOM。React在内存中维护一�
 大多数时候你应该呆在React的“虚拟浏览器”世界里面，因为它性能更加好，并且容易思考。但是，有时你简单地需要调用底层的API，或许借助于第三方的类似于jQuery插件这种库。React为你提供了直接使用底层DOM API的途径。
 
 
-## Refs和getDOMNode()
+## Refs和findDOMNode()
 
-为了和浏览器交互，你将需要对DOM节点的引用。每一个挂载的React组件有一个`getDOMNode()`方法，你可以调用这个方法来获取对该节点的引用。
+为了和浏览器交互，你将需要对DOM节点的引用。React提供了`React.findDOMNode(component)`函数，你可以调用这个函数来获取该组件的DOM结点。
 
 > 注意：
 >
-> `getDOMNode()`仅在挂载的组件上有效（也就是说，组件已经被放进了DOM中）。如果你尝试在一个未被挂载的组件上调用这个函数（例如在创建组件的`render()`函数中调用`getDOMNode()`），将会抛出异常。
+> `findDOMNode()`仅在挂载的组件上有效（也就是说，组件已经被放进了DOM中）。如果你尝试在一个未被挂载的组件上调用这个函数（例如在创建组件的`render()`函数中调用`findDOMNode()`），将会抛出异常。
 
 为了获取一个到React组件的引用，你可以使用`this`来得到当前的React组件，或者你可以使用refs来指向一个你拥有的组件。它们像这样工作：
 
@@ -32,7 +32,7 @@ React是很快的，因为它从不直接操作DOM。React在内存中维护一�
 var MyComponent = React.createClass({
   handleClick: function() {
     // Explicitly focus the text input using the raw DOM API.
-    this.refs.myTextInput.getDOMNode().focus();
+    React.findDOMNode(this.refs.myTextInput).focus();
   },
   render: function() {
     // The ref attribute adds a reference to the component to
@@ -97,7 +97,7 @@ React提供生命周期方法，你可以在这些方法中放入自己的代码
 
 _挂载的_复合组件也支持如下方法：
 
-* `getDOMNode(): DOMElement`可以在任何挂载的组件上面调用，用于获取一个指向它的渲染DOM节点的引用。
+* `findDOMNode(): DOMElement`可以在任何挂载的组件上面调用，用于获取一个指向它的渲染DOM节点的引用。
 * `forceUpdate()`当你知道一些很深的组件state已经改变了的时候，可以在该组件上面调用，而不是使用`this.setState()`。
 
 
