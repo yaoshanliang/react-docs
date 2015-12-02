@@ -30,4 +30,4 @@ React.render(<input value={false} />, mountNode);
 React.render(<div>{false}</div>, mountNode);
 ```
 
-上面这个没有被渲染成 `"false"`  字符串是应为要考虑到这种常见的情况：`<div>{x > 1 && 'You have more than one item'}</div>`.
+上面这个没有被渲染成 `"false"`  字符串是因为要考虑到这种常见的情况：`<div>{x > 1 && 'You have more than one item'}</div>`.
