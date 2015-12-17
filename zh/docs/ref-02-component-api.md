@@ -78,13 +78,13 @@ setProps(object nextProps[, function callback])
 
 当和一个外部的 JavaScript 应用集成的时候，你可能想给一个用 `React.render()` 渲染的组件打上改变的标记。
 
-尽管在同一个节点上再次调用 `React.render()` 来更新根组件是首选的方式，也可以调用 `setProps()` 来改变组件的属性，触发一次重新渲染。另外，可以传递一个可选的回调函数，该函数将会在 `setProps` 完成并且组件重新渲染完成之后调用。
+尽管在同一个节点上再次调用 `React.render()` 来更新根组件是首选的方式，但是也可以通过调用 `setProps()` 来改变组件的属性，触发一次重新渲染。另外，可以传递一个可选的回调函数，该函数将会在 `setProps` 完成并且组件重新渲染完成之后调用。
 
 > 注意：
 >
 > When possible, the declarative approach of calling `React.render()` again is preferred; it tends to make updates easier to reason about. (There's no significant performance difference between the two approaches.)
 >
-> 刚方法仅在根组件上面调用。也就是说，仅在直接传给 `React.render()` 的组件上可用，在它的子级组件上不可用。如果你倾向于在子组件上使用 `setProps()`，不要利用响应式更新，而是当子组件在 `render()` 中创建的时候传入新的 prop 到子组件中。
+> 该方法仅在根组件上面调用。也就是说，仅在直接传给 `React.render()` 的组件上可用，在它的子级组件上不可用。如果你倾向于在子组件上使用 `setProps()`，不要利用响应式更新，而是当组件在 `render()` 中创建的时候传入新的 prop 到子组件中。
 
 
 ### replaceProps
