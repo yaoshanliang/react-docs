@@ -14,10 +14,10 @@ redirect_from: "docs/index.html"
 
 ## 初学者教程包 (Starter Kit)
 
-开始先下载初学者教程包。
+如果不想使用npm可以下载初学者教程包，其中预置了React和ReactDOM。
 
 <div class="buttons-unit downloads">
-  <a href="/react/downloads/react-{{site.react_version}}.zip" class="button">
+  <a href="http://facebook.github.io/react/downloads/react-0.14.7.zip" class="button">
     下载初学者教程包 {{site.react_version}}
   </a>
 </div>
@@ -28,13 +28,16 @@ redirect_from: "docs/index.html"
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
     <script src="build/react.js"></script>
-    <script src="build/JSXTransformer.js"></script>
+    <script src="build/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
   </head>
   <body>
     <div id="example"></div>
-    <script type="text/jsx">
-      React.render(
+    <script type="text/babel">
+      ReactDOM.render(
         <h1>Hello, world!</h1>,
         document.getElementById('example')
       );
@@ -43,7 +46,7 @@ redirect_from: "docs/index.html"
 </html>
 ```
 
-在 JavaScript 代码里写着 XML 格式的代码称为 JSX；可以去 [JSX 语法](/react/docs/jsx-in-depth.html) 里学习更多 JSX 相关的知识。为了把 JSX 转成标准的 JavaScript，我们用 `<script type="text/jsx">` 标签包裹着含有 JSX 的代码，然后引入 `JSXTransformer.js` 库来实现在浏览器里的代码转换。
+在 JavaScript 代码里写着 XML 格式的代码称为 JSX；可以去 [JSX 语法](/react/docs/jsx-in-depth.html) 里学习更多 JSX 相关的知识。为了把 JSX 转成标准的 JavaScript，我们用 `<script type="text/babel">` 标签，然后通过Babel转换成在浏览器中真正执行的内容。
 
 ### 分离文件
 
@@ -59,7 +62,7 @@ React.render(
 然后在 `helloworld.html` 引用它：
 
 ```html{10}
-<script type="text/jsx" src="src/helloworld.js"></script>
+<script type="text/babel" src="src/helloworld.js"></script>
 ```
 请注意，某些浏览器（如，Chrome浏览器）将无法加载该文件，除非它通过HTTP服务。
 

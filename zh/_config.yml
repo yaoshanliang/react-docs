@@ -6,6 +6,7 @@ baseurl: "/react"
 permalink: "/blog/:year/:month/:day/:title.html"
 paginate_path: "/blog/page:num/"
 relative_permalinks: true
+gems: [jekyll-paginate]
 paginate: 5
 timezone: America/Los_Angeles
 highlighter: pygments
@@ -34,4 +35,4 @@ sass:
   sass_dir: _css
 gems:
 - jekyll-redirect-from
-react_version: 0.13.0
+react_version: 0.14.7
