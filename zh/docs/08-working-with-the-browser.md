@@ -103,11 +103,9 @@ _挂载的_复合组件也支持如下方法：
 
 ## 跨浏览器支持和兼容代码（Browser Support and Polyfills）
 
-在Facebook，我们支持低版本的浏览器，包括IE8。我们已经写好兼容代码很长时间了，这能让我们写有远见的JS。这意味着我们没有零散的骇客代码充斥在我们的代码库里面，并且我们依然能够预计我们的代码“正常工作起来”。例如，不使用`+new Date()`，我们能够写`Date.now()`。
-At Facebook, we support older browsers, including IE8. We've had polyfills in place for a long time to allow us to write forward-thinking JS. This means we don't have a bunch of hacks scattered throughout our codebase and we can still expect our code to "just work". For example, instead of seeing `+new Date()`, we can just write `Date.now()`. Since the open source React is the same as what we use internally, we've carried over this philosophy of using forward thinking JS.
+在Facebook里，我们支持低版本的浏览器，包括IE8。我们提前很早就写好polyfills（填充工具，这里语意应为兼容工具或代码），这让我们可以去写些前瞻性思维的JS。这意味我们的代码库里没有一堆乱七八糟的hacks技巧，但我们的代码仍可按预期地正常工作。例如，我们可以直接写 `Date.now()`，而不用写`+new Date()`。从React的开源版本跟我们（Facebook）内部版本相同的时候开始，我们就已经延续了这一理念——运用前瞻性思维的JS 。
 
-In addition to that philosophy, we've also taken the stance that we, as authors of a JS library, should not be shipping polyfills as a part of our library. If every library did this, there's a good chance you'd be sending down the same polyfill multiple times, which could be a sizable chunk of dead code. If your product needs to support older browsers, chances are you're already using something like [es5-shim](https://github.com/kriskowal/es5-shim).
-
+除了这一理念之外，站在一个JS库作者的立场，我们也不应该让polyfills成为我们代码库里的一部分。如果每个代码库都包含polyfills，那你项目中可能会多次包含相同的polyfills，这会产生一大堆无效代码。如果你项目中需要支持老版本的浏览器，你可以试试（或许你已经在用了）类似[es5-shim](https://github.com/kriskowal/es5-shim)这样的东西。
 
 ### 支持低版本浏览器的兼容代码
 
@@ -129,64 +127,21 @@ In addition to that philosophy, we've also taken the stance that we, as authors 
 * `Object.create`
 * `Object.freeze`
 
-The unminified build of React needs the following from [paulmillr's console-polyfill](https://github.com/paulmillr/console-polyfill).
+未压缩版本的React需要[paulmillr写的console-polyfill](https://github.com/paulmillr/console-polyfill)来提供以下api。
 
 * `console.*`
 
-When using HTML5 elements in IE8 including `<section>`, `<article>`, `<nav>`, `<header>`, and `<footer>`, it's also necessary to include [html5shiv](https://github.com/aFarkas/html5shiv) or a similar script.
+当我们在IE8里面使用HTML5的标签 `<section>`、`<article>`、`<nav>`、`<header>`和`<footer>`时，项目中需要包含[html5shiv](https://github.com/aFarkas/html5shiv) 或类似的脚本。
 
 
-### Cross-browser Issues
+### 跨浏览器问题（Cross-browser Issues）
 
-Although React is pretty good at abstracting browser differences, some browsers are limited or present quirky behaviors that we couldn't find a workaround for.
+尽管React在抽象浏览器行为差异方面做得不错，但仍有一些浏览器有限制，或存在一些我们也找不到解决办法的怪异行为。
 
+#### IE8上的onScroll事件
 
-#### onScroll event on IE8
+在IE8的`onscroll`事件没有冒泡，IE8也没有API定义如何处理事件捕获，这意味着React没办法监听这些事件。目前，IE8上这一事件的处理程序是没有。
 
-On IE8 the `onScroll` event doesn't bubble and IE8 doesn't have an API to define handlers to the capturing phase of an event, meaning there is no way for React to listen to these events.
-Currently a handler to this event is ignored on IE8.
+On IE8 the onScroll event doesn't bubble and IE8 doesn't have an API to define handlers to the capturing phase of an event, meaning there is no way for React to listen to these events. Currently a handler to this event is ignored on IE8.
 
-See the [onScroll doesn't work in IE8](https://github.com/facebook/react/issues/631) GitHub issue for more information.
-ve carried over this philosophy of using forward thinking JS.
-
-In addition to that philosophy, we've also taken the stance that we, as authors of a JS library, should not be shipping polyfills as a part of our library. If every library did this, there's a good chance you'd be sending down the same polyfill multiple times, which could be a sizable chunk of dead code. If your product needs to support older browsers, chances are you're already using something like [es5-shim](https://github.com/kriskowal/es5-shim).
-
-
-### Polyfills Needed to Support Older Browsers
-
-`es5-shim.js` from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim) provides the following that React needs:
-
-* `Array.isArray`
-* `Array.prototype.every`
-* `Array.prototype.forEach`
-* `Array.prototype.indexOf`
-* `Array.prototype.map`
-* `Date.now`
-* `Function.prototype.bind`
-* `Object.keys`
-* `String.prototype.split`
-* `String.prototype.trim`
-
-`es5-sham.js`, also from [kriskowal's es5-shim](https://github.com/kriskowal/es5-shim), provides the following that React needs:
-
-* `Object.create`
-* `Object.freeze`
-
-The unminified build of React needs the following from [paulmillr's console-polyfill](https://github.com/paulmillr/console-polyfill).
-
-* `console.*`
-
-When using HTML5 elements in IE8 including `<section>`, `<article>`, `<nav>`, `<header>`, and `<footer>`, it's also necessary to include [html5shiv](https://github.com/aFarkas/html5shiv) or a similar script.
-
-
-### Cross-browser Issues
-
-Although React is pretty good at abstracting browser differences, some browsers are limited or present quirky behaviors that we couldn't find a workaround for.
-
-
-#### onScroll event on IE8
-
-On IE8 the `onScroll` event doesn't bubble and IE8 doesn't have an API to define handlers to the capturing phase of an event, meaning there is no way for React to listen to these events.
-Currently a handler to this event is ignored on IE8.
-
-See the [onScroll doesn't work in IE8](https://github.com/facebook/react/issues/631) GitHub issue for more information.
+阅读[onScroll doesn't work in IE8](https://github.com/facebook/react/issues/631) GitHub issue 了解更多信息。
