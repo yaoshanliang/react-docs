@@ -151,7 +151,7 @@ next: working-with-the-browser.html
 
 ### 为什么 `<select>` 使用 `value` 属性                  
 
-HTML 中 `<select>` 通常使用 `<option>` 的 `selected` 属性设置选中状态；React 为了更方面的控制组件，采用以下方式代替：
+HTML 中 `<select>` 通常使用 `<option>` 的 `selected` 属性设置选中状态；React 为了更方便的控制组件，采用以下方式代替：
 
 ```javascript
   <select value="B">
