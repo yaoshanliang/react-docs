@@ -184,7 +184,7 @@ componentWillUpdate(object nextProps, object nextState)
 
 > 注意：
 >
-> 你*不能*在刚方法中使用 `this.setState()`。如果需要更新 state 来响应某个 prop 的改变，请使用 `componentWillReceiveProps`。
+> 你*不能*在该方法中使用 `this.setState()`。如果需要更新 state 来响应某个 prop 的改变，请使用 `componentWillReceiveProps`。
 
 
 ### 更新： componentDidUpdate
