@@ -11,7 +11,7 @@ next: false-in-jsx.html
 在 `componentDidMount` 时加载数据。当加载成功，将数据存储在 state 中，触发 render 来更新你的 UI。
 
 
-当执行同步请求的响应时，在更新 state 前， 一定要先通过 `this.isMounted()` 来检测组件的状态是否还是 mounted。
+当执行异步请求的响应时，在更新 state 前， 一定要先通过 `this.isMounted()` 来检测组件的状态是否还是 mounted。
 
 
 下面这个例子请求了一个 Github 用户最近的 gist:
