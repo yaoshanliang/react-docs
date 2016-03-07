@@ -118,7 +118,7 @@ JSX 语法是可选的，但是我们发现 JSX 语句比纯 JavaScript 用起�
 
 #### 发生了什么
 
-我们通过 JavaScript 对象传递一些方法到 `React.createClass()` 来创建一个新的 React 组件。其中最重要的方法是 `render` ，该方法返回一颗 React 组件树，这棵树最终将会渲染成 HTML 。
+我们通过 JavaScript 对象传递一些方法到 `React.createClass()` 来创建一个新的 React 组件。其中最重要的方法是 `render` ，该方法返回一棵 React 组件树，这棵树最终将会渲染成 HTML 。
 
 这里的 `<div>` 标签不是真正的 DOM 节点；他们是 React `div` 组件的实例。你可以认为这些标签就是一些标记或者数据， React 知道如何处理它们。React 是**安全的**。我们不生成 HTML 字符串，因此默认阻止了 XSS 攻击。
 
