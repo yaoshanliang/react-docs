@@ -7,7 +7,7 @@ prev: maximum-number-of-jsx-root-nodes.html
 next: children-props-type.html
 ---
 
-当为内联样式指定一个像素值得时候， React 会在你的数字后面自动加上 "px" , 所以下面这样的写法是有效的：
+当为内联样式指定一个像素值的时候， React 会在你的数字后面自动加上 "px" , 所以下面这样的写法是有效的：
 
 ```js
 var divStyle = {height: 10}; // rendered as "height:10px"
