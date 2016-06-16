@@ -222,7 +222,7 @@ Markdown 是一种简单的格式化内联文本的方式。例如，用星号�
 
 首先，引入第三方的 **marked** 库到你的应用。这是一个将 Markdown 文本转换成原生 HTML 的 JavaScript 库。在头部加一个 script 标签（我们已经在 React 操练场上包含了这个标签）：
 
-```html{7}
+```html{9}
 <!-- index.html -->
 <head>
   <meta charset="utf-8" />
@@ -259,7 +259,7 @@ var Comment = React.createClass({
 
 那是 React 在保护你免受 [XSS 攻击](https://en.wikipedia.org/wiki/Cross-site_scripting)。这里有一种方法解决这个问题，但是框架会警告你别使用这种方法：
 
-```javascript{4,10}
+```javascript{3-6,14}
 // tutorial7.js
 var Comment = React.createClass({
   rawMarkup: function() {
